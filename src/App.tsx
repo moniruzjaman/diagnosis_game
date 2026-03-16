@@ -80,13 +80,13 @@ interface GameState {
 }
 
 const ACHIEVEMENTS: Achievement[] = [
-  { id: 'perfect_scout', title: 'নিখুঁত পর্যবেক্ষক (Perfect Scout)', description: 'মাঠের সবকটি লক্ষণ সঠিকভাবে খুঁজে বের করেছেন।', icon: Eye, color: 'text-blue-500' },
-  { id: 'sharp_eye', title: 'তীক্ষ্ণ দৃষ্টি (Sharp Eye)', description: 'প্রথম চেষ্টাতেই সঠিক রোগ নির্ণয় করেছেন।', icon: Brain, color: 'text-purple-500' },
-  { id: 'master_surveyor', title: 'দক্ষ পরিমাপক (Master Surveyor)', description: 'ক্ষতির পরিমাণ নিখুঁতভাবে পরিমাপ করেছেন।', icon: Ruler, color: 'text-amber-500' },
-  { id: 'risk_analyst', title: 'ঝুঁকি বিশ্লেষক (Risk Analyst)', description: 'পরিবেশ ও আবহাওয়ার ঝুঁকি সঠিকভাবে বুঝতে পেরেছেন।', icon: CloudSun, color: 'text-sky-500' },
-  { id: 'ipm_strategist', title: 'আইপিএম বিশেষজ্ঞ (IPM Strategist)', description: 'সঠিক ও টেকসই বালাই ব্যবস্থাপনা গ্রহণ করেছেন।', icon: ShieldCheck, color: 'text-emerald-500' },
+  { id: 'perfect_scout', title: 'নিখুঁত পর্যবেক্ষক (Perfect Scout)', description: 'মাঠের সবকটি লক্ষণ সঠিকভাবে খুঁজে বের করেছেন।', icon: Eye, color: 'text-yellow-400' },
+  { id: 'sharp_eye', title: 'তীক্ষ্ণ দৃষ্টি (Sharp Eye)', description: 'প্রথম চেষ্টাতেই সঠিক রোগ নির্ণয় করেছেন।', icon: Brain, color: 'text-yellow-500' },
+  { id: 'master_surveyor', title: 'দক্ষ পরিমাপক (Master Surveyor)', description: 'ক্ষতির পরিমাণ নিখুঁতভাবে পরিমাপ করেছেন।', icon: Ruler, color: 'text-yellow-400' },
+  { id: 'risk_analyst', title: 'ঝুঁকি বিশ্লেষক (Risk Analyst)', description: 'পরিবেশ ও আবহাওয়ার ঝুঁকি সঠিকভাবে বুঝতে পেরেছেন।', icon: CloudSun, color: 'text-yellow-500' },
+  { id: 'ipm_strategist', title: 'আইপিএম বিশেষজ্ঞ (IPM Strategist)', description: 'সঠিক ও টেকসই বালাই ব্যবস্থাপনা গ্রহণ করেছেন।', icon: ShieldCheck, color: 'text-yellow-400' },
   { id: 'smart_farmer', title: 'স্মার্ট কৃষিবিদ (Smart Farmer)', description: '১০০/১০০ স্কোর নিয়ে সিমুলেশন সম্পন্ন করেছেন।', icon: Trophy, color: 'text-yellow-500' },
-  { id: 'quick_learner', title: 'দ্রুত শিক্ষার্থী (Quick Learner)', description: 'সফলভাবে সিমুলেশনটি সম্পন্ন করেছেন।', icon: Zap, color: 'text-orange-500' }
+  { id: 'quick_learner', title: 'দ্রুত শিক্ষার্থী (Quick Learner)', description: 'সফলভাবে সিমুলেশনটি সম্পন্ন করেছেন।', icon: Zap, color: 'text-yellow-400' }
 ];
 
 // --- CABI Terminology Constants ---
@@ -117,7 +117,7 @@ const ENCYCLOPEDIA_DATA = [
     symptoms: ['পাতায় চোখের মতো দাগ', 'গিঁট কালো হয়ে ভেঙে যাওয়া', 'শীষ সাদা হয়ে যাওয়া (চিটা)'],
     management: ['প্রতিরোধক জাত ব্যবহার', 'জমিতে পর্যাপ্ত পানি রাখা', 'সুষম সার প্রয়োগ'],
     icon: FlaskConical,
-    color: 'bg-orange-100 text-orange-600'
+    color: 'bg-yellow-100 text-yellow-600'
   },
   {
     id: 'bph',
@@ -127,7 +127,7 @@ const ENCYCLOPEDIA_DATA = [
     symptoms: ['গাছের গোড়ায় পোকার উপস্থিতি', 'গাছ পুড়ে যাওয়ার মতো হলুদ হওয়া', 'চক্রাকারে গাছ মরে যাওয়া'],
     management: ['আলোক ফাঁদ ব্যবহার', 'বিলি পদ্ধতি অনুসরণ', 'হাঁস পালন'],
     icon: Bug,
-    color: 'bg-amber-100 text-amber-600'
+    color: 'bg-yellow-100 text-yellow-600'
   },
   {
     id: 'gallmidge',
@@ -137,7 +137,7 @@ const ENCYCLOPEDIA_DATA = [
     symptoms: ['কুশি পেঁয়াজ পাতার মতো হওয়া', 'শীষ না আসা', 'গাছ খাটো হয়ে যাওয়া'],
     management: ['আলোক ফাঁদ ব্যবহার', 'সুষম পটাশ সার প্রয়োগ', 'প্রতিরোধক জাত চাষ'],
     icon: Bug,
-    color: 'bg-slate-100 text-slate-600'
+    color: 'bg-green-100 text-green-600'
   },
   {
     id: 'etl',
@@ -147,7 +147,7 @@ const ENCYCLOPEDIA_DATA = [
     symptoms: ['ক্ষতির শতাংশ পরিমাপ', 'আক্রান্ত গাছের সংখ্যা গণনা'],
     management: ['নিয়মিত মাঠ পর্যবেক্ষণ', 'সঠিক সময়ে সিদ্ধান্ত গ্রহণ'],
     icon: Ruler,
-    color: 'bg-blue-100 text-blue-600'
+    color: 'bg-yellow-100 text-yellow-600'
   },
   {
     id: 'biocontrol',
@@ -157,7 +157,7 @@ const ENCYCLOPEDIA_DATA = [
     symptoms: ['বন্ধু পোকার উপস্থিতি', 'প্রাকৃতিক ভারসাম্য রক্ষা', 'বিষমুক্ত ফসল'],
     management: ['বন্ধু পোকা সংরক্ষণ', 'পার্চিং (ডাল পোতা)', 'রাসায়নিক বিষ পরিহার'],
     icon: ShieldCheck,
-    color: 'bg-emerald-100 text-emerald-600'
+    color: 'bg-green-100 text-green-600'
   },
   {
     id: 'ipm',
@@ -177,7 +177,7 @@ const ENCYCLOPEDIA_DATA = [
     symptoms: ['পাতার রঙ পরিবর্তন', 'গাছের বৃদ্ধি কমে যাওয়া'],
     management: ['সঠিক সেচ ব্যবস্থাপনা', 'সুষম সার প্রয়োগ'],
     icon: ThermometerSun,
-    color: 'bg-blue-100 text-blue-600'
+    color: 'bg-yellow-100 text-yellow-600'
   },
   {
     id: 'scouting',
@@ -187,7 +187,7 @@ const ENCYCLOPEDIA_DATA = [
     symptoms: ['পুরো মাঠ কভার করা', 'এলোমেলোভাবে নমুনা না নেওয়া'],
     management: ['সপ্তাহে অন্তত দুইবার পর্যবেক্ষণ'],
     icon: Eye,
-    color: 'bg-purple-100 text-purple-600'
+    color: 'bg-yellow-100 text-yellow-600'
   }
 ];
 
@@ -251,7 +251,7 @@ const Encyclopedia = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               </div>
 
               {/* Details Area */}
-              <div className="md:col-span-2 bg-green-800 rounded-3xl p-8 border border-green-700">
+              <div className="md:col-span-2 bg-green-800 rounded-3xl p-8 border border-yellow-500/30">
                 {selectedId ? (
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -281,7 +281,7 @@ const Encyclopedia = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                               </p>
 
                               <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="bg-green-900 p-5 rounded-2xl border border-green-700 shadow-sm">
+                                <div className="bg-green-900 p-5 rounded-2xl border border-yellow-500/30 shadow-sm">
                                   <h4 className="font-black text-yellow-400 mb-3 flex items-center gap-2">
                                     <Search className="w-4 h-4" /> লক্ষণসমূহ
                                   </h4>
@@ -293,7 +293,7 @@ const Encyclopedia = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                     ))}
                                   </ul>
                                 </div>
-                                <div className="bg-green-900 p-5 rounded-2xl border border-green-700 shadow-sm">
+                                <div className="bg-green-900 p-5 rounded-2xl border border-yellow-500/30 shadow-sm">
                                   <h4 className="font-black text-yellow-400 mb-3 flex items-center gap-2">
                                     <ShieldCheck className="w-4 h-4" /> ব্যবস্থাপনা
                                   </h4>
@@ -366,7 +366,7 @@ const FarmerAvatar = ({ className = "w-12 h-12", mood = "normal" }: { className?
       animate={mood}
     >
       <div className="absolute inset-0 bg-amber-100 rounded-full border-2 border-amber-600 shadow-md overflow-hidden flex items-end justify-center">
-        <div className="w-3/4 h-[45%] bg-emerald-600 rounded-t-3xl" />
+        <div className="w-3/4 h-[45%] bg-green-600 rounded-t-3xl" />
       </div>
       <div className="absolute top-[35%] w-[55%] h-[45%] bg-orange-200 rounded-full border border-orange-300 flex flex-col items-center justify-center gap-0.5">
         <motion.div 
@@ -391,8 +391,8 @@ const FarmerAvatar = ({ className = "w-12 h-12", mood = "normal" }: { className?
             initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0 }}
             className="absolute -top-2 -right-2 flex flex-col items-end gap-1 z-20"
           >
-            <div className="w-1.5 h-1.5 bg-slate-200 rounded-full border border-slate-300" />
-            <div className="w-2.5 h-2.5 bg-slate-200 rounded-full border border-slate-300 mr-1" />
+            <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full border border-yellow-500" />
+            <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full border border-yellow-500 mr-1" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -785,10 +785,10 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
 
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }} className="space-y-6 max-w-5xl mx-auto">
-      <div className="glass-panel p-6 rounded-3xl">
+      <div className="bg-green-800 border border-yellow-500/30 p-6 rounded-3xl">
         <div className="flex justify-between items-start mb-4">
-          <h2 className="text-3xl font-black text-emerald-900 flex items-center gap-3 italic">
-            <Eye className="w-10 h-10 text-emerald-600" /> {CABI_TERMS.observe}
+          <h2 className="text-3xl font-black text-white flex items-center gap-3 italic">
+            <Eye className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.observe}
           </h2>
           <HintButton 
             hint="মাঠের কোণগুলোতে এবং মাঝখানে ভালো করে লক্ষ্য করুন। 'W' প্যাটার্নে হাঁটলে সবকটি লক্ষণ পাওয়া সহজ হয়।" 
@@ -802,10 +802,10 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
         <AvatarDialog text={`আসুন মাঠের গভীরে যাই। 'W' প্যাটার্নে হেঁটে ${hotspots.length}টি পয়েন্ট থেকে নমুনা সংগ্রহ করি। মাটির ঘ্রাণ আর ধানের পাতার অবস্থা আমাদের অনেক কিছু বলবে।`} mood="normal" />
       </div>
 
-      <div className="relative aspect-[16/9] md:aspect-[21/9] bg-emerald-800 rounded-[2rem] shadow-2xl overflow-hidden border-4 border-white/10">
+      <div className="relative aspect-[16/9] md:aspect-[21/9] bg-green-800 rounded-[2rem] shadow-2xl overflow-hidden border-4 border-yellow-500/30">
         {/* Realistic Field Background */}
         <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-transparent to-emerald-900/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-green-900/80 via-transparent to-green-900/20" />
         
         {/* Interactive Grid */}
         <div className="absolute inset-0 p-4 sm:p-8 grid grid-cols-6 grid-rows-5 gap-2 sm:gap-4 z-10">
@@ -824,13 +824,13 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
               >
                 {!isFound && (
                   <div className="sway">
-                    <Sprout className={`w-8 h-8 sm:w-12 sm:h-12 ${isHotspot ? 'text-emerald-400/60' : 'text-emerald-600/30'}`} />
+                    <Sprout className={`w-8 h-8 sm:w-12 sm:h-12 ${isHotspot ? 'text-yellow-400/60' : 'text-green-600/30'}`} />
                   </div>
                 )}
                 
                 {isFound && (
-                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="bg-emerald-500 p-2 rounded-full shadow-lg">
-                    <Search className="w-5 h-5 text-white" />
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="bg-yellow-500 p-2 rounded-full shadow-lg">
+                    <Search className="w-5 h-5 text-green-950" />
                   </motion.div>
                 )}
                 
@@ -854,14 +854,14 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
         </svg>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 glass-panel p-6 rounded-3xl">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-green-800 border border-yellow-500/30 p-6 rounded-3xl">
         <div className="flex items-center gap-4">
-          <div className="bg-emerald-100 p-3 rounded-2xl">
-            <Activity className="w-6 h-6 text-emerald-600" />
+          <div className="bg-yellow-500/20 p-3 rounded-2xl">
+            <Activity className="w-6 h-6 text-yellow-400" />
           </div>
           <div>
-            <div className="text-xs font-bold text-emerald-600 uppercase tracking-widest">নমুনা সংগ্রহ প্রগতি</div>
-            <div className="text-2xl font-black text-slate-800">{found.length} <span className="text-slate-400">/ {hotspots.length}</span></div>
+            <div className="text-xs font-bold text-yellow-400 uppercase tracking-widest">নমুনা সংগ্রহ প্রগতি</div>
+            <div className="text-2xl font-black text-white">{found.length} <span className="text-white/50">/ {hotspots.length}</span></div>
           </div>
         </div>
         
@@ -870,8 +870,8 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
           onClick={() => onComplete("মাঠে 'W' প্যাটার্নে হেঁটে দেখা গেছে কিছু গাছের পাতা হলুদ হয়ে শুকিয়ে যাচ্ছে।")}
           className={`group px-10 py-4 rounded-2xl font-black text-lg flex items-center gap-3 transition-all transform active:scale-95
             ${found.length === hotspots.length 
-              ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-[0_10px_20px_-5px_rgba(5,150,105,0.4)]' 
-              : 'bg-slate-200 text-slate-400 cursor-not-allowed'}
+              ? 'bg-red-600 text-white hover:bg-red-500 shadow-[0_10px_20px_-5px_rgba(220,38,38,0.4)]' 
+              : 'bg-green-900 text-white/40 cursor-not-allowed border border-green-700'}
           `}
         >
           পরবর্তী ধাপ 
@@ -930,10 +930,10 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 1.1 }} className="space-y-6 max-w-5xl mx-auto">
-      <div className="glass-panel p-6 rounded-3xl">
+      <div className="bg-green-800 border border-yellow-500/30 p-6 rounded-3xl">
         <div className="flex justify-between items-start mb-4">
-          <h2 className="text-3xl font-black text-emerald-900 flex items-center gap-3 italic">
-            <Brain className="w-10 h-10 text-emerald-600" /> {CABI_TERMS.diagnose}
+          <h2 className="text-3xl font-black text-white flex items-center gap-3 italic">
+            <Brain className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.diagnose}
           </h2>
           <HintButton 
             hint="পাতার কিনারা বরাবর ঢেউখেলানো হলুদ দাগ এবং শুকিয়ে যাওয়া অংশ ব্যাকটেরিয়া জনিত ধসা রোগের (BLB) প্রধান লক্ষণ।" 
@@ -949,33 +949,33 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* High-Tech Inspection Area */}
-        <div className="relative bg-slate-950 rounded-[2.5rem] p-4 shadow-2xl border-8 border-slate-900 overflow-hidden aspect-square group">
+        <div className="relative bg-green-950 rounded-[2.5rem] p-4 shadow-2xl border-4 border-green-900 overflow-hidden aspect-square group">
           {/* Realistic Microscope Background */}
           <div className="absolute inset-0 opacity-80 bg-[url('https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" />
-          <div className="absolute inset-0 bg-emerald-950/20 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-green-950/20 mix-blend-overlay" />
           
           {/* Digital Scan Line */}
           <div className="scan-line" />
 
           {/* Lens Flare Effect */}
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-emerald-400/10 blur-[100px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-yellow-400/10 blur-[100px] rounded-full pointer-events-none" />
 
-          <div className="relative h-full w-full rounded-[2rem] overflow-hidden flex flex-col items-center justify-center border-2 border-white/10 backdrop-blur-[1px]">
+          <div className="relative h-full w-full rounded-[2rem] overflow-hidden flex flex-col items-center justify-center border-2 border-yellow-500/30 backdrop-blur-[1px]">
             {step === 0 ? (
               <div className="text-center space-y-6 z-10">
                 <motion.div 
                   animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
                   transition={{ repeat: Infinity, duration: 2 }}
-                  className="w-32 h-32 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto border-2 border-emerald-500/30"
+                  className="w-32 h-32 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto border-2 border-yellow-500/30"
                 >
-                  <Search className="w-16 h-16 text-emerald-400" />
+                  <Search className="w-16 h-16 text-yellow-400" />
                 </motion.div>
                 <div className="space-y-2">
-                  <p className="text-emerald-400 font-mono text-sm tracking-widest uppercase">System Ready</p>
+                  <p className="text-yellow-400 font-mono text-sm tracking-widest uppercase">System Ready</p>
                   <button
                     onClick={handleScan}
                     disabled={scanning}
-                    className="bg-white text-slate-950 font-black px-10 py-5 rounded-2xl shadow-[0_10px_30px_rgba(255,255,255,0.3)] hover:scale-105 transition-transform disabled:opacity-50 active:scale-95"
+                    className="bg-yellow-500 text-green-950 font-black px-10 py-5 rounded-2xl shadow-[0_10px_30px_rgba(250,204,21,0.3)] hover:scale-105 transition-transform disabled:opacity-50 active:scale-95"
                   >
                     {scanning ? 'বিশ্লেষণ চলছে...' : 'বিশ্লেষণ শুরু করুন'}
                   </button>
@@ -984,21 +984,21 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
             ) : (
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-                className="relative z-10 bg-slate-900/90 backdrop-blur-2xl p-8 rounded-3xl w-full h-full flex flex-col justify-center border border-white/20 shadow-inner"
+                className="relative z-10 bg-green-900/90 backdrop-blur-2xl p-8 rounded-3xl w-full h-full flex flex-col justify-center border border-yellow-500/30 shadow-inner"
               >
                 {/* Visual Aid Hotspots */}
                 <div className="absolute inset-0 pointer-events-none">
                   <div className="absolute top-1/4 left-1/3 pointer-events-auto">
                     <VisualAidTooltip text="V-আকৃতির হলুদ দাগ: এটি BLB রোগের প্রধান লক্ষণ।">
-                      <div className="w-6 h-6 bg-amber-400/30 border border-amber-400 rounded-full animate-pulse flex items-center justify-center">
-                        <div className="w-2 h-2 bg-amber-400 rounded-full" />
+                      <div className="w-6 h-6 bg-yellow-400/30 border border-yellow-400 rounded-full animate-pulse flex items-center justify-center">
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full" />
                       </div>
                     </VisualAidTooltip>
                   </div>
                   <div className="absolute bottom-1/3 right-1/4 pointer-events-auto">
                     <VisualAidTooltip text="ব্যাকটেরিয়াল রস: সকালে পাতার ডগায় আঠালো বিন্দু দেখা যায়।">
-                      <div className="w-6 h-6 bg-blue-400/30 border border-blue-400 rounded-full animate-pulse flex items-center justify-center">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full" />
+                      <div className="w-6 h-6 bg-red-400/30 border border-red-400 rounded-full animate-pulse flex items-center justify-center">
+                        <div className="w-2 h-2 bg-red-400 rounded-full" />
                       </div>
                     </VisualAidTooltip>
                   </div>
@@ -1006,33 +1006,33 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
 
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-10 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981]" />
+                    <div className="w-2 h-10 bg-yellow-500 rounded-full shadow-[0_0_10px_#eab308]" />
                     <h3 className="font-black text-2xl text-white italic tracking-tight">লক্ষণ বিশ্লেষণ রিপোর্ট</h3>
                   </div>
-                  <div className="font-mono text-emerald-500 text-xs animate-pulse">LIVE FEED</div>
+                  <div className="font-mono text-yellow-400 text-xs animate-pulse">LIVE FEED</div>
                 </div>
                 <div className="space-y-4">
                   {[
-                    { t: "পাতার কিনারা বরাবর V-shape হলুদ দাগ", icon: <CheckCircle className="text-emerald-400" /> },
-                    { t: "দাগগুলো ক্রমশ নিচের দিকে ছড়াচ্ছে", icon: <CheckCircle className="text-emerald-400" /> },
-                    { t: "কোনো পোকা বা পোকার মল দেখা যাচ্ছে না", icon: <AlertTriangle className="text-amber-400" /> },
-                    { t: "সকালে পাতার ডগায় আঠালো ব্যাকটেরিয়াল রস", icon: <CheckCircle className="text-emerald-400" /> }
+                    { t: "পাতার কিনারা বরাবর V-shape হলুদ দাগ", icon: <CheckCircle className="text-yellow-400" /> },
+                    { t: "দাগগুলো ক্রমশ নিচের দিকে ছড়াচ্ছে", icon: <CheckCircle className="text-yellow-400" /> },
+                    { t: "কোনো পোকা বা পোকার মল দেখা যাচ্ছে না", icon: <AlertTriangle className="text-red-400" /> },
+                    { t: "সকালে পাতার ডগায় আঠালো ব্যাকটেরিয়াল রস", icon: <CheckCircle className="text-yellow-400" /> }
                   ].map((item, i) => (
                     <motion.div 
                       key={i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.2 }}
-                      className="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors"
+                      className="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border border-yellow-500/20 hover:bg-white/10 transition-colors"
                     >
-                      <div className="bg-slate-800 p-2 rounded-lg">{item.icon}</div>
-                      <span className="text-slate-200 font-bold text-lg">{item.t}</span>
+                      <div className="bg-green-800 p-2 rounded-lg">{item.icon}</div>
+                      <span className="text-white font-bold text-lg">{item.t}</span>
                     </motion.div>
                   ))}
                 </div>
-                <div className="mt-8 pt-6 border-t border-white/10 flex justify-between items-center">
-                  <div className="text-slate-500 font-mono text-[10px]">SCAN_ID: CABI_BLB_092</div>
+                <div className="mt-8 pt-6 border-t border-yellow-500/20 flex justify-between items-center">
+                  <div className="text-yellow-500/50 font-mono text-[10px]">SCAN_ID: CABI_BLB_092</div>
                   <div className="flex gap-1">
-                    <div className="w-1 h-1 bg-emerald-500 rounded-full animate-ping" />
-                    <div className="w-1 h-1 bg-emerald-500 rounded-full animate-ping delay-75" />
-                    <div className="w-1 h-1 bg-emerald-500 rounded-full animate-ping delay-150" />
+                    <div className="w-1 h-1 bg-yellow-500 rounded-full animate-ping" />
+                    <div className="w-1 h-1 bg-yellow-500 rounded-full animate-ping delay-75" />
+                    <div className="w-1 h-1 bg-yellow-500 rounded-full animate-ping delay-150" />
                   </div>
                 </div>
               </motion.div>
@@ -1043,8 +1043,8 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
         {/* Deduction Area */}
         <div className={`space-y-6 flex flex-col justify-center transition-all duration-700 ${step === 0 ? 'opacity-30 blur-sm pointer-events-none' : 'opacity-100'}`}>
           <div className="space-y-2">
-            <h3 className="font-black text-2xl text-slate-800 italic">আপনার চূড়ান্ত সিদ্ধান্ত কী?</h3>
-            <p className="text-slate-500 font-medium">CABI প্রোটোকল অনুযায়ী সঠিক কারণটি বেছে নিন।</p>
+            <h3 className="font-black text-2xl text-white italic">আপনার চূড়ান্ত সিদ্ধান্ত কী?</h3>
+            <p className="text-white/70 font-medium">CABI প্রোটোকল অনুযায়ী সঠিক কারণটি বেছে নিন।</p>
           </div>
           
           <div className="space-y-4">
@@ -1054,16 +1054,16 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
                 onClick={() => handleSelect(cause)}
                 className={`w-full text-left p-6 rounded-[1.5rem] border-4 transition-all flex items-center gap-6 group
                   ${selectedCause === cause.id 
-                    ? 'border-emerald-500 bg-emerald-50 shadow-xl scale-[1.02]' 
-                    : 'border-slate-100 hover:border-emerald-200 bg-white shadow-sm'}
+                    ? 'border-yellow-500 bg-green-800 shadow-xl scale-[1.02]' 
+                    : 'border-green-700 hover:border-yellow-500/50 bg-green-900'}
                 `}
               >
-                <div className={`p-4 rounded-2xl transition-colors ${selectedCause === cause.id ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-600'}`}>
+                <div className={`p-4 rounded-2xl transition-colors ${selectedCause === cause.id ? 'bg-yellow-500 text-green-950' : 'bg-green-800 text-yellow-400 group-hover:bg-yellow-500/20'}`}>
                   <cause.icon className="w-8 h-8" />
                 </div>
                 <div>
-                  <div className="font-black text-xl text-slate-800">{cause.label}</div>
-                  <div className="text-slate-500 font-medium">{cause.desc}</div>
+                  <div className="font-black text-xl text-white">{cause.label}</div>
+                  <div className="text-white/70 font-medium">{cause.desc}</div>
                 </div>
               </button>
             ))}
@@ -1073,12 +1073,12 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
             {selectedCause && (
               <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-4 overflow-hidden">
                 {causes.find(c => c.id === selectedCause)?.correct ? (
-                  <div className="bg-emerald-600 text-white p-6 rounded-2xl shadow-lg flex items-start gap-4">
-                    <ShieldCheck className="w-8 h-8 shrink-0" />
+                  <div className="bg-green-700 text-white p-6 rounded-2xl shadow-lg flex items-start gap-4 border border-yellow-500/30">
+                    <ShieldCheck className="w-8 h-8 shrink-0 text-yellow-400" />
                     <p className="font-bold text-lg leading-snug">সঠিক বিশ্লেষণ! এটি ব্যাকটেরিয়া জনিত রোগ (Bacterial Leaf Blight - BLB)। আপনি একজন দক্ষ প্ল্যান্ট ডক্টর!</p>
                   </div>
                 ) : (
-                  <div className="bg-red-500 text-white p-6 rounded-2xl shadow-lg flex items-start gap-4">
+                  <div className="bg-red-600 text-white p-6 rounded-2xl shadow-lg flex items-start gap-4">
                     <AlertTriangle className="w-8 h-8 shrink-0" />
                     <p className="font-bold text-lg leading-snug">ভুল বিশ্লেষণ। লক্ষণগুলো আবার ভালো করে দেখুন। এটি একটি সংক্রামক রোগ।</p>
                   </div>
@@ -1087,7 +1087,7 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
                 {causes.find(c => c.id === selectedCause)?.correct && (
                   <button
                     onClick={() => onComplete("লক্ষণ বিশ্লেষণ করে ব্যাকটেরিয়া জনিত রোগ (BLB) শনাক্ত করা হয়েছে।")}
-                    className="w-full bg-slate-900 text-white font-black py-5 rounded-2xl shadow-2xl hover:bg-black transition-colors flex justify-center items-center gap-3 text-xl"
+                    className="w-full bg-red-600 text-white font-black py-5 rounded-2xl shadow-2xl hover:bg-red-500 transition-colors flex justify-center items-center gap-3 text-xl"
                   >
                     পরবর্তী ধাপে যান <ChevronRight className="w-6 h-6" />
                   </button>
@@ -1139,10 +1139,10 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
 
   return (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 1.1 }} className="space-y-6 max-w-5xl mx-auto">
-      <div className="glass-panel p-6 rounded-3xl">
+      <div className="bg-green-800 border border-yellow-500/30 p-6 rounded-3xl">
         <div className="flex justify-between items-start mb-4">
-          <h2 className="text-3xl font-black text-emerald-900 flex items-center gap-3 italic">
-            <Ruler className="w-10 h-10 text-emerald-600" /> {CABI_TERMS.measure}
+          <h2 className="text-3xl font-black text-white flex items-center gap-3 italic">
+            <Ruler className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.measure}
           </h2>
           <HintButton 
             hint="যেসব গাছের গোছায় (hill) অন্তত একটি পাতায় লক্ষণ দেখা যাচ্ছে, সেগুলোই আক্রান্ত হিসেবে গণ্য করুন।" 
@@ -1156,7 +1156,7 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
         <AvatarDialog text="রোগ তো বুঝলাম, কিন্তু ক্ষতির পরিমাণ কতটুকু? চলুন ১২টি গুচ্ছের মধ্যে কয়টি আক্রান্ত হয়েছে তা চিহ্নিত করি। হলুদ দাগযুক্ত গাছগুলো খুঁজে বের করুন।" mood="thinking" />
       </div>
 
-      <div className="relative bg-emerald-900/90 rounded-[2.5rem] p-8 shadow-2xl border-4 border-white/10 overflow-hidden">
+      <div className="relative bg-green-900/90 rounded-[2.5rem] p-8 shadow-2xl border-4 border-yellow-500/30 overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-grid-white opacity-10" />
         
@@ -1165,7 +1165,7 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
             initial={{ y: -100 }}
             animate={{ y: 400 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-x-0 h-1 bg-emerald-400/50 shadow-[0_0_20px_#34d399] z-20"
+            className="absolute inset-x-0 h-1 bg-yellow-400/50 shadow-[0_0_20px_#eab308] z-20"
           />
         )}
 
@@ -1185,26 +1185,26 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
                   onClick={() => togglePlant(i)}
                   className={`relative aspect-square rounded-2xl flex items-center justify-center transition-all duration-300 border-2 group
                     ${isSelected 
-                      ? 'bg-white/30 border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]' 
+                      ? 'bg-yellow-500/30 border-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.4)]' 
                       : 'bg-black/20 border-transparent hover:bg-white/10'}
                   `}
                 >
                   <div className="relative">
                     <Sprout className={`w-12 h-12 sm:w-16 sm:h-16 transition-all duration-500 animate-sway
-                      ${isInfected && (isSelected || assessed) ? 'text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]' : 'text-emerald-400'}
-                      ${!isInfected && isSelected ? 'text-emerald-200' : ''}
+                      ${isInfected && (isSelected || assessed) ? 'text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]' : 'text-green-400'}
+                      ${!isInfected && isSelected ? 'text-green-200' : ''}
                     `} />
                     {isInfected && (isSelected || assessed) && (
                       <motion.div 
                         animate={{ opacity: [0.4, 1, 0.4] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute inset-0 bg-amber-400/20 blur-lg rounded-full"
+                        className="absolute inset-0 bg-yellow-400/20 blur-lg rounded-full"
                       />
                     )}
                   </div>
                   
                   {isSelected && (
-                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-2 -right-2 bg-white text-emerald-600 rounded-full p-1 shadow-lg z-30">
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-2 -right-2 bg-yellow-500 text-green-950 rounded-full p-1 shadow-lg z-30">
                       <CheckCircle className="w-5 h-5" />
                     </motion.div>
                   )}
@@ -1221,14 +1221,14 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-6 glass-panel p-6 rounded-3xl">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-6 bg-green-800 border border-yellow-500/30 p-6 rounded-3xl">
         <div className="flex items-center gap-4">
-          <div className="bg-amber-100 p-3 rounded-2xl">
-            <Target className="w-6 h-6 text-amber-600" />
+          <div className="bg-yellow-500/20 p-3 rounded-2xl">
+            <Target className="w-6 h-6 text-yellow-400" />
           </div>
           <div>
-            <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">আক্রান্ত গাছ চিহ্নিত</div>
-            <div className="text-2xl font-black text-slate-800">{selectedIndices.length} <span className="text-slate-400">/ {infectedIndices.length}</span></div>
+            <div className="text-xs font-bold text-yellow-400 uppercase tracking-widest">আক্রান্ত গাছ চিহ্নিত</div>
+            <div className="text-2xl font-black text-white">{selectedIndices.length} <span className="text-white/50">/ {infectedIndices.length}</span></div>
           </div>
         </div>
 
@@ -1238,8 +1238,8 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
             onClick={handleAssess}
             className={`px-10 py-4 rounded-2xl font-black text-lg transition-all transform active:scale-95
               ${selectedIndices.length > 0 
-                ? 'bg-slate-900 text-white hover:bg-black shadow-xl' 
-                : 'bg-slate-200 text-slate-400 cursor-not-allowed'}
+                ? 'bg-red-600 text-white hover:bg-red-500 shadow-xl' 
+                : 'bg-green-900 text-white/40 cursor-not-allowed border border-green-700'}
             `}
           >
             পরিমাপ যাচাই করুন
@@ -1249,12 +1249,12 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
             {isCorrect ? (
               <div className="flex items-center gap-4">
                 <div className="text-right hidden sm:block">
-                  <div className="text-emerald-600 font-black">চমৎকার!</div>
-                  <div className="text-slate-500 text-sm font-medium">ক্ষতির হার ৩৩% (ETL এর কাছাকাছি)</div>
+                  <div className="text-yellow-400 font-black">চমৎকার!</div>
+                  <div className="text-white/70 text-sm font-medium">ক্ষতির হার ৩৩% (ETL এর কাছাকাছি)</div>
                 </div>
                 <button
                   onClick={() => onComplete("ক্ষতির মাত্রা পরিমাপ: ১২টির মধ্যে ৪টি গুচ্ছ আক্রান্ত (৩৩%), যা ETL এর কাছাকাছি।")}
-                  className="bg-emerald-600 text-white px-8 py-4 rounded-2xl font-black text-lg hover:bg-emerald-700 shadow-lg flex items-center gap-2"
+                  className="bg-red-600 text-white px-8 py-4 rounded-2xl font-black text-lg hover:bg-red-500 shadow-lg flex items-center gap-2"
                 >
                   পরবর্তী ধাপ <ChevronRight className="w-6 h-6" />
                 </button>
@@ -1262,12 +1262,12 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
             ) : (
               <div className="flex items-center gap-4">
                 <div className="text-right hidden sm:block">
-                  <div className="text-red-500 font-black">আবার চেষ্টা করুন</div>
-                  <div className="text-slate-500 text-sm font-medium">কিছু আক্রান্ত গাছ বাদ পড়েছে</div>
+                  <div className="text-red-400 font-black">আবার চেষ্টা করুন</div>
+                  <div className="text-white/70 text-sm font-medium">কিছু আক্রান্ত গাছ বাদ পড়েছে</div>
                 </div>
                 <button
                   onClick={() => { setAssessed(false); setSelectedIndices([]); }}
-                  className="bg-slate-200 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg hover:bg-slate-300 flex items-center gap-2"
+                  className="bg-yellow-500 text-green-950 px-8 py-4 rounded-2xl font-black text-lg hover:bg-yellow-400 flex items-center gap-2"
                 >
                   <RotateCcw className="w-6 h-6" /> পুনরায় শুরু
                 </button>
@@ -1370,14 +1370,14 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6 max-w-5xl mx-auto relative">
       {/* Weather Background Simulation */}
-      <div className="absolute inset-0 -z-10 rounded-[3rem] overflow-hidden bg-slate-900">
+      <div className="absolute inset-0 -z-10 rounded-[3rem] overflow-hidden bg-green-950">
         <motion.div 
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           className="absolute inset-0 opacity-40 bg-cover bg-center"
           style={{ backgroundImage: `url(${scenario.bgUrl})` }}
         />
-        <div className={`absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/80 to-slate-950`} />
+        <div className={`absolute inset-0 bg-gradient-to-b from-green-950/40 via-green-950/80 to-green-950`} />
         
         {/* Lightning Effect for Rainy/Stormy */}
         {scenario.type === 'rainy' && (
@@ -1431,10 +1431,10 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
         )}
       </div>
 
-      <div className="glass-panel p-6 rounded-3xl">
+      <div className="bg-green-800 border border-yellow-500/30 p-6 rounded-3xl">
         <div className="flex justify-between items-start mb-4">
-          <h2 className="text-3xl font-black text-emerald-900 flex items-center gap-3 italic">
-            <scenario.icon className="w-10 h-10 text-emerald-600" /> {CABI_TERMS.think}
+          <h2 className="text-3xl font-black text-white flex items-center gap-3 italic">
+            <scenario.icon className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.think}
           </h2>
           <HintButton 
             hint="বৃষ্টি এবং দমকা হাওয়া ব্যাকটেরিয়া ছড়িয়ে দিতে সাহায্য করে। তাই আবহাওয়ার পূর্বাভাস গুরুত্ব সহকারে দেখুন।" 
@@ -1454,29 +1454,29 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
       <div className="grid sm:grid-cols-2 gap-6">
         <motion.div 
           whileHover={{ y: -5 }}
-          className="bg-blue-900/40 backdrop-blur-xl p-6 rounded-[2rem] border border-blue-400/30 flex items-start gap-5 shadow-2xl"
+          className="bg-green-800/80 backdrop-blur-xl p-6 rounded-[2rem] border border-yellow-500/30 flex items-start gap-5 shadow-2xl"
         >
-          <div className="bg-blue-500 text-white p-4 rounded-2xl shadow-lg"><scenario.icon className="w-8 h-8" /></div>
+          <div className="bg-yellow-500 text-green-950 p-4 rounded-2xl shadow-lg"><scenario.icon className="w-8 h-8" /></div>
           <div>
-            <h3 className="font-black text-xl text-blue-100 mb-2 italic">{scenario.title}</h3>
-            <p className="text-blue-200 font-medium leading-relaxed">{scenario.desc} {scenario.impact}</p>
+            <h3 className="font-black text-xl text-yellow-400 mb-2 italic">{scenario.title}</h3>
+            <p className="text-white/80 font-medium leading-relaxed">{scenario.desc} {scenario.impact}</p>
           </div>
         </motion.div>
         
         <motion.div 
           whileHover={{ y: -5 }}
-          className="bg-amber-900/40 backdrop-blur-xl p-6 rounded-[2rem] border border-amber-400/30 flex items-start gap-5 shadow-2xl"
+          className="bg-green-800/80 backdrop-blur-xl p-6 rounded-[2rem] border border-red-500/30 flex items-start gap-5 shadow-2xl"
         >
-          <div className="bg-amber-500 text-white p-4 rounded-2xl shadow-lg"><FlaskConical className="w-8 h-8" /></div>
+          <div className="bg-red-500 text-white p-4 rounded-2xl shadow-lg"><FlaskConical className="w-8 h-8" /></div>
           <div>
-            <h3 className="font-black text-xl text-amber-100 mb-2 italic">সাম্প্রতিক কাজ</h3>
-            <p className="text-amber-200 font-medium leading-relaxed">গত সপ্তাহে জমিতে অতিরিক্ত ইউরিয়া সার প্রয়োগ করা হয়েছে। এটি গাছকে নরম ও রোগপ্রবণ করে তোলে।</p>
+            <h3 className="font-black text-xl text-red-400 mb-2 italic">সাম্প্রতিক কাজ</h3>
+            <p className="text-white/80 font-medium leading-relaxed">গত সপ্তাহে জমিতে অতিরিক্ত ইউরিয়া সার প্রয়োগ করা হয়েছে। এটি গাছকে নরম ও রোগপ্রবণ করে তোলে।</p>
           </div>
         </motion.div>
       </div>
 
-      <div className="glass-panel p-8 rounded-[2.5rem] shadow-2xl">
-        <h3 className="font-black text-2xl text-slate-800 mb-6 italic">আপনার ঝুঁকি বিশ্লেষণ কী?</h3>
+      <div className="bg-green-800 border border-yellow-500/30 p-8 rounded-[2.5rem] shadow-2xl">
+        <h3 className="font-black text-2xl text-white mb-6 italic">আপনার ঝুঁকি বিশ্লেষণ কী?</h3>
         <div className="grid gap-4">
           {scenario.riskOptions.map((option) => (
             <button
@@ -1485,15 +1485,15 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
               className={`w-full text-left p-6 rounded-2xl border-4 transition-all flex items-center gap-6 group
                 ${selectedRisk === option.id 
                   ? option.correct 
-                    ? 'border-emerald-500 bg-emerald-50 shadow-xl scale-[1.02]' 
-                    : 'border-red-500 bg-red-50 shadow-xl scale-[1.02]'
-                  : 'border-slate-100 hover:border-emerald-200 bg-white shadow-sm'}
+                    ? 'border-yellow-500 bg-green-700 shadow-xl scale-[1.02]' 
+                    : 'border-red-500 bg-red-900/50 shadow-xl scale-[1.02]'
+                  : 'border-green-700 hover:border-yellow-500/50 bg-green-900'}
               `}
             >
-              <div className={`p-4 rounded-xl transition-colors ${selectedRisk === option.id ? (option.correct ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white') : 'bg-slate-100 text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-600'}`}>
+              <div className={`p-4 rounded-xl transition-colors ${selectedRisk === option.id ? (option.correct ? 'bg-yellow-500 text-green-950' : 'bg-red-500 text-white') : 'bg-green-800 text-yellow-400 group-hover:bg-yellow-500/20'}`}>
                 {option.correct ? <ShieldCheck className="w-8 h-8" /> : (selectedRisk === option.id ? <AlertTriangle className="w-8 h-8" /> : <Activity className="w-8 h-8" />)}
               </div>
-              <span className={`font-black text-xl ${selectedRisk === option.id ? (option.correct ? 'text-emerald-900' : 'text-red-900') : 'text-slate-700'}`}>
+              <span className={`font-black text-xl ${selectedRisk === option.id ? (option.correct ? 'text-white' : 'text-red-200') : 'text-white/80'}`}>
                 {option.text}
               </span>
             </button>
@@ -1505,7 +1505,7 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="mt-8 overflow-hidden">
               <button
                 onClick={() => onComplete(`ঝুঁকি বিশ্লেষণ: ${scenario.title} ও অতিরিক্ত ইউরিয়ার কারণে ${scenario.type === 'sunny' ? 'মাঝারি' : 'উচ্চ'} ঝুঁকি বিদ্যমান।`)}
-                className="w-full bg-slate-900 text-white font-black py-6 px-10 rounded-2xl shadow-2xl hover:bg-black transition-all flex justify-center items-center gap-4 text-2xl group"
+                className="w-full bg-red-600 text-white font-black py-6 px-10 rounded-2xl shadow-2xl hover:bg-red-500 transition-all flex justify-center items-center gap-4 text-2xl group"
               >
                 সিদ্ধান্ত গ্রহণ ধাপে যান 
                 <ChevronRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
@@ -1555,10 +1555,10 @@ function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnl
 
   return (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 1.1 }} className="space-y-6 max-w-5xl mx-auto">
-      <div className="glass-panel p-6 rounded-3xl">
+      <div className="bg-green-800 border border-yellow-500/30 p-6 rounded-3xl">
         <div className="flex justify-between items-start mb-4">
-          <h2 className="text-3xl font-black text-emerald-900 flex items-center gap-3 italic">
-            <ShieldCheck className="w-10 h-10 text-emerald-600" /> {CABI_TERMS.act}
+          <h2 className="text-3xl font-black text-white flex items-center gap-3 italic">
+            <ShieldCheck className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.act}
           </h2>
           <HintButton 
             hint="সমন্বিত বালাই ব্যবস্থাপনায় (IPM) রাসায়নিকের আগে সাংস্কৃতিক ও জৈবিক দমনের ওপর গুরুত্ব দেওয়া হয়। ইউরিয়া সার ব্যাকটেরিয়ার বৃদ্ধি বাড়ায়।" 
@@ -1574,9 +1574,9 @@ function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnl
 
       <div className="grid lg:grid-cols-5 gap-8">
         {/* IPM Pyramid Visual */}
-        <div className="lg:col-span-2 flex flex-col justify-end gap-3 h-full min-h-[400px] p-8 bg-slate-950 rounded-[2.5rem] shadow-2xl border border-white/10 relative overflow-hidden group">
+        <div className="lg:col-span-2 flex flex-col justify-end gap-3 h-full min-h-[400px] p-8 bg-green-950 rounded-[2.5rem] shadow-2xl border border-yellow-500/30 relative overflow-hidden group">
           <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center group-hover:scale-110 transition-transform duration-1000" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-green-950 via-transparent to-transparent" />
           
           <div className="relative z-10 space-y-2">
             <motion.div 
@@ -1599,7 +1599,7 @@ function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnl
               initial={{ x: -50, opacity: 0 }} 
               animate={{ x: 0, opacity: 1 }} 
               transition={{ delay: 0.4 }} 
-              className="bg-amber-500/90 text-white text-center py-6 font-black text-xs border-b-2 border-white/20 mx-6 shadow-lg"
+              className="bg-yellow-500/90 text-green-950 text-center py-6 font-black text-xs border-b-2 border-white/20 mx-6 shadow-lg"
             >
               যান্ত্রিক (Mechanical)
             </motion.div>
@@ -1607,18 +1607,18 @@ function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnl
               initial={{ x: -50, opacity: 0 }} 
               animate={{ x: 0, opacity: 1 }} 
               transition={{ delay: 0.5 }} 
-              className="bg-emerald-500 text-white text-center py-12 rounded-b-2xl font-black text-xl mx-9 shadow-[0_0_40px_rgba(16,185,129,0.5)] border-2 border-emerald-400/50"
+              className="bg-green-500 text-white text-center py-12 rounded-b-2xl font-black text-xl mx-9 shadow-[0_0_40px_rgba(34,197,94,0.5)] border-2 border-green-400/50"
             >
               সাংস্কৃতিক (Cultural)
             </motion.div>
           </div>
           
-          <div className="text-center text-[10px] text-slate-500 mt-6 font-black uppercase tracking-[0.3em] z-10">IPM পিরামিড (ভিত্তি থেকে শুরু)</div>
+          <div className="text-center text-[10px] text-yellow-400 mt-6 font-black uppercase tracking-[0.3em] z-10">IPM পিরামিড (ভিত্তি থেকে শুরু)</div>
         </div>
 
         {/* Action Selection */}
         <div className="lg:col-span-3 space-y-4">
-          <h3 className="font-black text-2xl text-slate-800 italic mb-4">আপনার চূড়ান্ত পরামর্শ:</h3>
+          <h3 className="font-black text-2xl text-white italic mb-4">আপনার চূড়ান্ত পরামর্শ:</h3>
           {actions.map((action) => (
             <button
               key={action.id}
@@ -1626,22 +1626,22 @@ function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnl
               className={`w-full text-left p-6 rounded-[2rem] border-4 transition-all flex items-center gap-6 group relative overflow-hidden
                 ${selectedAction === action.id 
                   ? action.correct 
-                    ? 'border-emerald-500 bg-emerald-50 shadow-xl scale-[1.02]' 
-                    : 'border-red-500 bg-red-50 shadow-xl scale-[1.02]'
-                  : 'border-slate-100 bg-white hover:border-emerald-200 shadow-sm'}
+                    ? 'border-yellow-500 bg-green-800 shadow-xl scale-[1.02]' 
+                    : 'border-red-500 bg-red-900/50 shadow-xl scale-[1.02]'
+                  : 'border-green-700 bg-green-900 hover:border-yellow-500/50'}
               `}
             >
-              <div className={`p-4 rounded-2xl transition-colors ${selectedAction === action.id ? (action.correct ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white') : 'bg-slate-100 text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-600'}`}>
+              <div className={`p-4 rounded-2xl transition-colors ${selectedAction === action.id ? (action.correct ? 'bg-yellow-500 text-green-950' : 'bg-red-500 text-white') : 'bg-green-800 text-yellow-400 group-hover:bg-yellow-500/20'}`}>
                 <action.icon className="w-8 h-8" />
               </div>
               <div className="flex-1">
-                <div className="font-black text-xl text-slate-800">{action.label}</div>
-                <div className="text-slate-500 font-medium leading-relaxed">{action.desc}</div>
+                <div className="font-black text-xl text-white">{action.label}</div>
+                <div className="text-white/70 font-medium leading-relaxed">{action.desc}</div>
               </div>
               
               {selectedAction === action.id && action.correct && (
                 <div className="absolute right-6 top-1/2 -translate-y-1/2 animate-stamp">
-                  <div className="border-4 border-emerald-500 text-emerald-500 font-black px-4 py-2 rounded-xl rotate-[-15deg] uppercase text-2xl tracking-tighter opacity-80">
+                  <div className="border-4 border-yellow-500 text-yellow-500 font-black px-4 py-2 rounded-xl rotate-[-15deg] uppercase text-2xl tracking-tighter opacity-80">
                     অনুমোদিত
                   </div>
                 </div>
@@ -1652,15 +1652,15 @@ function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnl
           <AnimatePresence>
             {selectedAction && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pt-4 space-y-4">
-                <div className={`p-6 rounded-[1.5rem] shadow-lg flex items-start gap-4 border-l-8 ${actions.find(a => a.id === selectedAction)?.correct ? 'bg-emerald-600 text-white border-emerald-400' : 'bg-red-500 text-white border-red-300'}`}>
-                  {actions.find(a => a.id === selectedAction)?.correct ? <ShieldCheck className="w-8 h-8 shrink-0" /> : <AlertTriangle className="w-8 h-8 shrink-0" />}
+                <div className={`p-6 rounded-[1.5rem] shadow-lg flex items-start gap-4 border-l-8 ${actions.find(a => a.id === selectedAction)?.correct ? 'bg-green-700 text-white border-yellow-400' : 'bg-red-600 text-white border-red-400'}`}>
+                  {actions.find(a => a.id === selectedAction)?.correct ? <ShieldCheck className="w-8 h-8 shrink-0 text-yellow-400" /> : <AlertTriangle className="w-8 h-8 shrink-0" />}
                   <p className="font-bold text-lg leading-snug">{actions.find(a => a.id === selectedAction)?.feedback}</p>
                 </div>
                 
                 {actions.find(a => a.id === selectedAction)?.correct && (
                   <button
                     onClick={() => onComplete("ব্যবস্থাপনা: ইউরিয়া বন্ধ, জমি শুকানো এবং পটাশ প্রয়োগের সিদ্ধান্ত গৃহীত।")}
-                    className="w-full bg-slate-900 text-white font-black py-6 px-10 rounded-2xl shadow-2xl hover:bg-black transition-all flex justify-center items-center gap-4 text-2xl group"
+                    className="w-full bg-red-600 text-white font-black py-6 px-10 rounded-2xl shadow-2xl hover:bg-red-500 transition-all flex justify-center items-center gap-4 text-2xl group"
                   >
                     সিমুলেশন রিপোর্ট দেখুন 
                     <Activity className="w-8 h-8 group-hover:rotate-12 transition-transform" />
@@ -1697,8 +1697,8 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
   }, [state.score]);
 
   return (
-    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="glass-panel rounded-[3rem] shadow-2xl overflow-hidden border-4 border-white/20 max-w-5xl mx-auto">
-      <div className="bg-slate-950 p-12 text-center text-white relative overflow-hidden">
+    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-green-800 border-4 border-yellow-500/30 rounded-[3rem] shadow-2xl overflow-hidden max-w-5xl mx-auto">
+      <div className="bg-green-950 p-12 text-center text-white relative overflow-hidden">
         {/* Celebration Particles (CSS only) */}
         <div className="absolute inset-0 pointer-events-none">
           {Array.from({ length: 30 }).map((_, i) => (
@@ -1716,7 +1716,7 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
                 repeat: Infinity, 
                 delay: Math.random() * 2 
               }}
-              className={`absolute top-0 w-3 h-3 rounded-sm ${i % 2 === 0 ? 'bg-emerald-400' : 'bg-amber-400'}`}
+              className={`absolute top-0 w-3 h-3 rounded-sm ${i % 2 === 0 ? 'bg-green-400' : 'bg-yellow-400'}`}
               style={{ left: `${Math.random() * 100}%` }}
             />
           ))}
@@ -1724,11 +1724,11 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
 
         <div className="relative z-10 flex flex-col items-center">
           <div className="relative mb-6">
-            <div className="absolute inset-0 bg-emerald-500/30 blur-3xl rounded-full animate-pulse" />
+            <div className="absolute inset-0 bg-yellow-500/30 blur-3xl rounded-full animate-pulse" />
             <FarmerAvatar className="w-32 h-32 relative z-10" mood="happy" />
           </div>
           <h1 className="text-5xl md:text-7xl font-black mb-4 italic tracking-tight">মিশন সফল!</h1>
-          <p className="text-emerald-200 text-xl md:text-2xl font-medium max-w-2xl leading-relaxed">আপনার সঠিক ও বিজ্ঞানভিত্তিক পরামর্শে আমার ধানক্ষেত রক্ষা পেয়েছে। আপনি একজন সত্যিকারের স্মার্ট কৃষি বিশেষজ্ঞ!</p>
+          <p className="text-yellow-200 text-xl md:text-2xl font-medium max-w-2xl leading-relaxed">আপনার সঠিক ও বিজ্ঞানভিত্তিক পরামর্শে আমার ধানক্ষেত রক্ষা পেয়েছে। আপনি একজন সত্যিকারের স্মার্ট কৃষি বিশেষজ্ঞ!</p>
         </div>
       </div>
       
@@ -1738,24 +1738,24 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100 }}
-            className="bg-emerald-50 border-4 border-emerald-200 rounded-[3rem] p-12 text-center min-w-[320px] shadow-2xl relative"
+            className="bg-green-900 border-4 border-yellow-500/30 rounded-[3rem] p-12 text-center min-w-[320px] shadow-2xl relative"
           >
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest shadow-lg">
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-yellow-500 text-green-950 px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest shadow-lg">
               চূড়ান্ত ফলাফল
             </div>
-            <div className="text-sm text-emerald-600 font-black uppercase tracking-[0.2em] mb-2 opacity-60">আপনার দক্ষতা স্কোর</div>
-            <div className="text-8xl font-black text-emerald-700 tabular-nums leading-none">
-              {displayScore}<span className="text-3xl text-emerald-400">/100</span>
+            <div className="text-sm text-yellow-400 font-black uppercase tracking-[0.2em] mb-2 opacity-60">আপনার দক্ষতা স্কোর</div>
+            <div className="text-8xl font-black text-white tabular-nums leading-none">
+              {displayScore}<span className="text-3xl text-yellow-400">/100</span>
             </div>
           </motion.div>
         </div>
 
         <div className="space-y-10">
-          <div className="flex items-center gap-4 border-b-4 border-slate-100 pb-4">
-            <div className="bg-slate-100 p-3 rounded-2xl">
-              <Search className="w-8 h-8 text-slate-600" />
+          <div className="flex items-center gap-4 border-b-4 border-yellow-500/30 pb-4">
+            <div className="bg-yellow-500/20 p-3 rounded-2xl">
+              <Search className="w-8 h-8 text-yellow-400" />
             </div>
-            <h3 className="text-2xl font-black text-slate-800 italic">ডায়াগনস্টিক রিপোর্ট সারাংশ:</h3>
+            <h3 className="text-2xl font-black text-white italic">ডায়াগনস্টিক রিপোর্ট সারাংশ:</h3>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -1765,27 +1765,27 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className="flex gap-5 items-start bg-white p-8 rounded-[2rem] border-2 border-slate-100 hover:border-emerald-200 hover:shadow-xl transition-all group"
+                className="flex gap-5 items-start bg-green-900 p-8 rounded-[2rem] border-2 border-yellow-500/30 hover:border-yellow-500/50 hover:shadow-xl transition-all group"
               >
-                <div className="bg-emerald-600 text-white w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 font-black text-xl shadow-lg group-hover:rotate-12 transition-transform">
+                <div className="bg-yellow-500 text-green-950 w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 font-black text-xl shadow-lg group-hover:rotate-12 transition-transform">
                   {idx + 1}
                 </div>
-                <p className="text-slate-700 font-bold text-lg leading-relaxed pt-1">{finding}</p>
+                <p className="text-white font-bold text-lg leading-relaxed pt-1">{finding}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
-        <div className="mt-16 bg-slate-950 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full -mr-32 -mt-32 blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full -ml-32 -mb-32 blur-[100px]" />
+        <div className="mt-16 bg-green-950 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden border border-yellow-500/30">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/10 rounded-full -mr-32 -mt-32 blur-[100px]" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-green-500/10 rounded-full -ml-32 -mb-32 blur-[100px]" />
           <div className="relative z-10 text-center space-y-4">
             <h4 className="font-black text-3xl italic">স্মার্ট কৃষকের মূলমন্ত্র</h4>
-            <p className="text-emerald-400 text-2xl font-black italic tracking-tight">"আগে দেখি, পরে বুঝি; না মেপে ওষুধ নয়"</p>
+            <p className="text-yellow-400 text-2xl font-black italic tracking-tight">"আগে দেখি, পরে বুঝি; না মেপে ওষুধ নয়"</p>
             <div className="pt-6">
               <button 
                 onClick={onRestart}
-                className="bg-white text-slate-900 hover:bg-emerald-50 px-12 py-5 rounded-2xl font-black text-xl shadow-xl transition-all active:scale-95 flex items-center gap-3 mx-auto"
+                className="bg-yellow-500 text-green-950 hover:bg-yellow-400 px-12 py-5 rounded-2xl font-black text-xl shadow-xl transition-all active:scale-95 flex items-center gap-3 mx-auto"
               >
                 <RotateCcw className="w-6 h-6" /> পুনরায় শুরু করুন
               </button>
@@ -1795,11 +1795,11 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
 
         {/* Achievements Section */}
         <div className="mt-20 space-y-10">
-          <div className="flex items-center gap-4 border-b-4 border-slate-100 pb-4">
-            <div className="bg-yellow-50 p-3 rounded-2xl">
-              <Trophy className="w-8 h-8 text-yellow-500" />
+          <div className="flex items-center gap-4 border-b-4 border-yellow-500/30 pb-4">
+            <div className="bg-yellow-500/20 p-3 rounded-2xl">
+              <Trophy className="w-8 h-8 text-yellow-400" />
             </div>
-            <h3 className="text-2xl font-black text-slate-800 italic">আপনার অর্জনসমূহ (Achievements):</h3>
+            <h3 className="text-2xl font-black text-white italic">আপনার অর্জনসমূহ (Achievements):</h3>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1813,21 +1813,21 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
                   transition={{ delay: idx * 0.05 }}
                   className={`p-8 rounded-[2.5rem] border-4 transition-all flex flex-col items-center text-center gap-6 relative group
                     ${isUnlocked 
-                      ? 'bg-white border-emerald-100 shadow-xl hover:shadow-2xl hover:-translate-y-2' 
-                      : 'bg-slate-50 border-slate-100 opacity-40 grayscale'}
+                      ? 'bg-green-900 border-yellow-500/30 shadow-xl hover:shadow-2xl hover:-translate-y-2' 
+                      : 'bg-green-950 border-green-800 opacity-40 grayscale'}
                   `}
                 >
                   {isUnlocked && (
-                    <div className="absolute top-4 right-4 text-emerald-500">
+                    <div className="absolute top-4 right-4 text-yellow-400">
                       <CheckCircle className="w-6 h-6" />
                     </div>
                   )}
-                  <div className={`p-6 rounded-[1.5rem] transition-all duration-500 ${isUnlocked ? 'bg-emerald-50 ' + achievement.color + ' group-hover:scale-110' : 'bg-slate-200 text-slate-400'}`}>
+                  <div className={`p-6 rounded-[1.5rem] transition-all duration-500 ${isUnlocked ? 'bg-yellow-500/20 ' + achievement.color + ' group-hover:scale-110' : 'bg-green-800 text-green-600'}`}>
                     <achievement.icon className="w-12 h-12" />
                   </div>
                   <div>
-                    <div className={`font-black text-xl mb-2 ${isUnlocked ? 'text-slate-800' : 'text-slate-400'}`}>{achievement.title}</div>
-                    <div className="text-slate-500 font-medium leading-relaxed">{achievement.description}</div>
+                    <div className={`font-black text-xl mb-2 ${isUnlocked ? 'text-white' : 'text-green-600'}`}>{achievement.title}</div>
+                    <div className="text-white/70 font-medium leading-relaxed">{achievement.description}</div>
                   </div>
                 </motion.div>
               );
@@ -1838,7 +1838,7 @@ function SummaryScreen({ state, onRestart, soundEnabled }: { state: GameState, o
         <div className="mt-12 text-center">
           <button
             onClick={onRestart}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-black py-6 px-12 rounded-full shadow-[0_15px_30px_-10px_rgba(16,185,129,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(16,185,129,0.6)] transition-all inline-flex items-center gap-4 text-xl active:scale-95"
+            className="bg-red-600 hover:bg-red-500 text-white font-black py-6 px-12 rounded-full shadow-[0_15px_30px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(220,38,38,0.6)] transition-all inline-flex items-center gap-4 text-xl active:scale-95"
           >
             <RotateCcw className="w-6 h-6" /> নতুন সিমুলেশন শুরু করুন
           </button>
