@@ -1,0 +1,5 @@
+{
+  "name": "স্মার্ট কৃষক সিমুলেশন (Smart Farmer Simulation)",
+  "description": "CABI প্রোটোকল ভিত্তিক ৫-ধাপের রোগ নির্ণয় ও সমাধান পদ্ধতি শিখতে একটি বাস্তবসম্মত সিমুলেশন গেম।",
+  "requestFramePermissions": []
+}
