@@ -201,30 +201,30 @@ const Encyclopedia = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md"
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-green-950/90 backdrop-blur-md"
           onClick={onClose}
         >
           <motion.div
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 20 }}
-            className="bg-white w-full max-w-4xl max-h-[85vh] rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col"
+            className="bg-green-900 w-full max-w-4xl max-h-[85vh] rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-2 border-yellow-500/30"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-emerald-50/50">
+            <div className="p-6 border-b border-yellow-500/30 flex justify-between items-center bg-green-800">
               <div className="flex items-center gap-3">
-                <div className="bg-emerald-600 text-white p-2 rounded-xl">
+                <div className="bg-yellow-500 text-green-950 p-2 rounded-xl">
                   <BookOpen className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-black text-slate-800 italic">কৃষি বিশ্বকোষ (Encyclopedia)</h2>
-                  <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest">স্মার্ট কৃষকের জ্ঞান ভাণ্ডার</p>
+                  <h2 className="text-2xl font-black text-white italic">কৃষি বিশ্বকোষ (Encyclopedia)</h2>
+                  <p className="text-xs font-bold text-yellow-400 uppercase tracking-widest">স্মার্ট কৃষকের জ্ঞান ভাণ্ডার</p>
                 </div>
               </div>
               <button 
                 onClick={onClose}
-                className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600"
+                className="p-2 hover:bg-green-700 rounded-full transition-colors text-yellow-400 hover:text-white"
               >
                 <X className="w-8 h-8" />
               </button>
@@ -240,18 +240,18 @@ const Encyclopedia = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                     onClick={() => setSelectedId(item.id)}
                     className={`w-full text-left p-4 rounded-2xl transition-all flex items-center gap-3 border-2
                       ${selectedId === item.id 
-                        ? 'bg-emerald-600 border-emerald-600 text-white shadow-lg scale-[1.02]' 
-                        : 'bg-white border-slate-100 hover:border-emerald-200 text-slate-600'}
+                        ? 'bg-yellow-500 border-yellow-400 text-green-950 shadow-lg scale-[1.02]' 
+                        : 'bg-green-800 border-green-700 hover:border-yellow-500/50 text-white'}
                     `}
                   >
-                    <item.icon className={`w-5 h-5 ${selectedId === item.id ? 'text-white' : 'text-emerald-600'}`} />
+                    <item.icon className={`w-5 h-5 ${selectedId === item.id ? 'text-green-950' : 'text-yellow-400'}`} />
                     <span className="font-bold text-sm">{item.title}</span>
                   </button>
                 ))}
               </div>
 
               {/* Details Area */}
-              <div className="md:col-span-2 bg-slate-50 rounded-3xl p-8 border border-slate-100">
+              <div className="md:col-span-2 bg-green-800 rounded-3xl p-8 border border-green-700">
                 {selectedId ? (
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -270,37 +270,37 @@ const Encyclopedia = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                 <item.icon className="w-10 h-10" />
                               </div>
                               <div>
-                                <div className="text-xs font-black uppercase tracking-widest opacity-60">{item.category}</div>
-                                <h3 className="text-2xl font-black text-slate-800">{item.title}</h3>
+                                <div className="text-xs font-black uppercase tracking-widest text-yellow-400">{item.category}</div>
+                                <h3 className="text-2xl font-black text-white">{item.title}</h3>
                               </div>
                             </div>
 
                             <div className="space-y-4">
-                              <p className="text-slate-600 font-medium leading-relaxed text-lg">
+                              <p className="text-white/90 font-medium leading-relaxed text-lg">
                                 {item.desc}
                               </p>
 
                               <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                  <h4 className="font-black text-emerald-700 mb-3 flex items-center gap-2">
+                                <div className="bg-green-900 p-5 rounded-2xl border border-green-700 shadow-sm">
+                                  <h4 className="font-black text-yellow-400 mb-3 flex items-center gap-2">
                                     <Search className="w-4 h-4" /> লক্ষণসমূহ
                                   </h4>
                                   <ul className="space-y-2">
                                     {item.symptoms.map((s, i) => (
-                                      <li key={i} className="text-sm text-slate-600 flex items-center gap-2">
-                                        <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full" /> {s}
+                                      <li key={i} className="text-sm text-white/80 flex items-center gap-2">
+                                        <div className="w-1.5 h-1.5 bg-red-400 rounded-full" /> {s}
                                       </li>
                                     ))}
                                   </ul>
                                 </div>
-                                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                  <h4 className="font-black text-blue-700 mb-3 flex items-center gap-2">
+                                <div className="bg-green-900 p-5 rounded-2xl border border-green-700 shadow-sm">
+                                  <h4 className="font-black text-yellow-400 mb-3 flex items-center gap-2">
                                     <ShieldCheck className="w-4 h-4" /> ব্যবস্থাপনা
                                   </h4>
                                   <ul className="space-y-2">
                                     {item.management.map((m, i) => (
-                                      <li key={i} className="text-sm text-slate-600 flex items-center gap-2">
-                                        <div className="w-1.5 h-1.5 bg-blue-400 rounded-full" /> {m}
+                                      <li key={i} className="text-sm text-white/80 flex items-center gap-2">
+                                        <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full" /> {m}
                                       </li>
                                     ))}
                                   </ul>
@@ -314,8 +314,8 @@ const Encyclopedia = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                   </AnimatePresence>
                 ) : (
                   <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-40">
-                    <BookOpen className="w-20 h-20 text-slate-300" />
-                    <p className="font-bold text-slate-400">বাম পাশ থেকে একটি বিষয় নির্বাচন করুন</p>
+                    <BookOpen className="w-20 h-20 text-yellow-400/50" />
+                    <p className="font-bold text-white/60">বাম পাশ থেকে একটি বিষয় নির্বাচন করুন</p>
                   </div>
                 )}
               </div>
@@ -338,9 +338,9 @@ const VisualAidTooltip = ({ text, children }: { text: string, children: React.Re
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-slate-900 text-white text-xs rounded-lg shadow-xl z-[60] text-center pointer-events-none"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-green-900 text-white text-xs rounded-lg shadow-xl z-[60] text-center pointer-events-none border border-yellow-500/30"
           >
-            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45" />
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-green-900 rotate-45 border-r border-b border-yellow-500/30" />
             {text}
           </motion.div>
         )}
@@ -407,10 +407,10 @@ const AvatarDialog = ({ text, mood = "normal" }: { text: string, mood?: "normal"
       initial={{ opacity: 0, x: -10, scale: 0.95 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      className="bg-emerald-50 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm border border-emerald-100 relative ml-3 mt-2"
+      className="bg-green-800 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm border border-yellow-500/30 relative ml-3 mt-2"
     >
-      <div className="absolute -left-2 top-0 w-4 h-4 bg-emerald-50 border-l border-t border-emerald-100 transform -skew-x-12" />
-      <p className="text-slate-700 font-medium relative z-10 leading-relaxed">{text}</p>
+      <div className="absolute -left-2 top-0 w-4 h-4 bg-green-800 border-l border-t border-yellow-500/30 transform -skew-x-12" />
+      <p className="text-white font-medium relative z-10 leading-relaxed">{text}</p>
     </motion.div>
   </div>
 );
@@ -440,15 +440,15 @@ const HintButton = ({ hint, onUse, score, soundEnabled, difficulty, hintsUsed }:
         disabled={isExhausted && !used}
         className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-sm
           ${used 
-            ? 'bg-amber-100 text-amber-700 border border-amber-200' 
+            ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/50' 
             : isExhausted
-              ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+              ? 'bg-green-900/50 text-white/40 cursor-not-allowed border border-green-700'
               : score >= settings.hintCost 
-                ? 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200' 
-                : 'bg-slate-100 text-slate-400 cursor-not-allowed'}
+                ? 'bg-green-800 text-yellow-400 hover:bg-green-700 border border-yellow-500/30' 
+                : 'bg-green-900/50 text-white/40 cursor-not-allowed border border-green-700'}
         `}
       >
-        <Lightbulb className={`w-4 h-4 ${used ? 'fill-amber-500 text-amber-500' : ''}`} />
+        <Lightbulb className={`w-4 h-4 ${used ? 'fill-yellow-400 text-yellow-400' : ''}`} />
         {used 
           ? (show ? 'হিন্ট লুকান' : 'হিন্ট দেখুন') 
           : isExhausted 
@@ -462,9 +462,9 @@ const HintButton = ({ hint, onUse, score, soundEnabled, difficulty, hintsUsed }:
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute bottom-full mb-3 right-0 w-64 p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl shadow-xl z-50 text-amber-900 text-sm font-medium leading-relaxed"
+            className="absolute bottom-full mb-3 right-0 w-64 p-4 bg-green-800 border-2 border-yellow-500/50 rounded-2xl shadow-xl z-50 text-yellow-100 text-sm font-medium leading-relaxed"
           >
-            <div className="absolute -bottom-2 right-6 w-4 h-4 bg-amber-50 border-r-2 border-b-2 border-amber-200 transform rotate-45" />
+            <div className="absolute -bottom-2 right-6 w-4 h-4 bg-green-800 border-r-2 border-b-2 border-yellow-500/50 transform rotate-45" />
             {hint}
           </motion.div>
         )}
@@ -539,7 +539,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-emerald-200">
+    <div className="min-h-screen bg-green-950 text-white font-sans selection:bg-yellow-300 selection:text-green-950">
       {/* Achievement Notification */}
       <AnimatePresence>
         {showAchievement && (
@@ -549,13 +549,13 @@ export default function App() {
             exit={{ y: -100, opacity: 0 }}
             className="fixed top-0 left-1/2 -translate-x-1/2 z-[100] w-full max-w-sm px-4"
           >
-            <div className="bg-slate-900 text-white p-4 rounded-2xl shadow-2xl border border-white/10 flex items-center gap-4">
-              <div className={`p-3 rounded-xl bg-white/10 ${showAchievement.color}`}>
+            <div className="bg-green-900 text-white p-4 rounded-2xl shadow-2xl border-2 border-yellow-400/50 flex items-center gap-4">
+              <div className={`p-3 rounded-xl bg-yellow-500/20 text-yellow-400`}>
                 <showAchievement.icon className="w-8 h-8" />
               </div>
               <div>
-                <div className="text-xs font-black text-emerald-400 uppercase tracking-widest mb-1">অর্জন আনলক হয়েছে!</div>
-                <div className="font-black text-lg leading-tight">{showAchievement.title}</div>
+                <div className="text-xs font-black text-yellow-400 uppercase tracking-widest mb-1">অর্জন আনলক হয়েছে!</div>
+                <div className="font-black text-lg leading-tight text-white">{showAchievement.title}</div>
               </div>
             </div>
           </motion.div>
@@ -563,19 +563,19 @@ export default function App() {
       </AnimatePresence>
       {/* Top Navigation / Progress Bar */}
       {gameState.phase !== 'intro' && (
-        <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <header className="bg-green-900 border-b-2 border-yellow-500/30 sticky top-0 z-50 shadow-lg">
           <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-emerald-700 font-bold text-lg">
+            <div className="flex items-center gap-2 text-yellow-400 font-bold text-lg">
               <Leaf className="w-6 h-6" />
               <span>স্মার্ট কৃষক সিমুলেশন</span>
             </div>
-            <div className="flex items-center gap-4 text-sm font-medium text-slate-500">
+            <div className="flex items-center gap-4 text-sm font-medium text-white">
               <button 
                 onClick={() => {
                   playSound('click', soundEnabled);
                   setIsEncyclopediaOpen(true);
                 }}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors font-bold"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-green-800 text-yellow-400 hover:bg-green-700 transition-colors font-bold border border-yellow-500/30"
                 title="এনসাইক্লোপিডিয়া দেখুন"
               >
                 <BookOpen className="w-5 h-5" />
@@ -583,12 +583,12 @@ export default function App() {
               </button>
               <button 
                 onClick={() => setSoundEnabled(!soundEnabled)}
-                className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors text-emerald-700"
+                className="p-2 rounded-xl bg-green-800 hover:bg-green-700 transition-colors text-yellow-400 border border-yellow-500/30"
                 title={soundEnabled ? "শব্দ বন্ধ করুন" : "শব্দ চালু করুন"}
               >
                 {soundEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
               </button>
-              <span className="flex items-center gap-1 bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+              <span className="flex items-center gap-1 bg-yellow-500 text-green-950 px-3 py-1 rounded-full font-bold">
                 <Target className="w-4 h-4" /> স্কোর: {gameState.score}
               </span>
             </div>
@@ -602,12 +602,12 @@ export default function App() {
               const isCurrent = p === gameState.phase;
               
               return (
-                <div key={p} className={`flex items-center gap-2 whitespace-nowrap ${isCurrent ? 'text-emerald-600 font-bold' : isPast ? 'text-emerald-400' : 'text-slate-300'}`}>
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 ${isCurrent ? 'border-emerald-600 bg-emerald-50' : isPast ? 'border-emerald-400 bg-emerald-400 text-white' : 'border-slate-300'}`}>
+                <div key={p} className={`flex items-center gap-2 whitespace-nowrap ${isCurrent ? 'text-yellow-400 font-bold' : isPast ? 'text-yellow-500' : 'text-white/40'}`}>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 ${isCurrent ? 'border-yellow-400 bg-yellow-500/20' : isPast ? 'border-yellow-500 bg-yellow-500 text-green-950' : 'border-white/30'}`}>
                     {isPast ? <CheckCircle className="w-4 h-4" /> : i + 1}
                   </div>
                   <span className="hidden sm:inline capitalize">{p}</span>
-                  {i < 4 && <div className={`w-4 sm:w-8 h-0.5 ${isPast ? 'bg-emerald-400' : 'bg-slate-200'}`} />}
+                  {i < 4 && <div className={`w-4 sm:w-8 h-0.5 ${isPast ? 'bg-yellow-500' : 'bg-white/20'}`} />}
                 </div>
               );
             })}
@@ -641,17 +641,17 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
       animate={{ opacity: 1 }} 
       className="relative min-h-[80vh] flex flex-col items-center justify-center p-6 md:p-12 overflow-hidden rounded-[3rem] shadow-2xl mt-10 max-w-5xl mx-auto"
     >
-      {/* Cinematic Background Layer */}
+      {/* Cinematic Background Layer - Dark Green */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-emerald-950" />
+        <div className="absolute inset-0 bg-green-950" />
         <motion.div 
           initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.4 }}
+          animate={{ scale: 1, opacity: 0.3 }}
           transition={{ duration: 2 }}
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/20 via-emerald-950/60 to-emerald-950" />
-        <div className="absolute inset-0 bg-grid-white opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-green-950/30 via-green-950/70 to-green-950" />
+        <div className="absolute inset-0 bg-grid-white opacity-10" />
       </div>
 
       {/* Floating Clouds for Atmosphere */}
@@ -666,13 +666,13 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, type: "spring" }}
         >
-          <div className="inline-block px-6 py-2 bg-emerald-500/20 backdrop-blur-md border border-emerald-400/30 rounded-full text-emerald-400 font-black text-sm uppercase tracking-[0.3em] mb-6">
+          <div className="inline-block px-6 py-2 bg-yellow-500/30 backdrop-blur-md border-2 border-yellow-400/60 rounded-full text-yellow-300 font-black text-sm uppercase tracking-[0.3em] mb-6">
             Smart Farmer Simulation 2.0
           </div>
-          <h1 className="text-6xl md:text-8xl font-black text-white italic leading-none tracking-tighter mb-4">
-            ধানের ডাক্তার <span className="text-emerald-500 block md:inline">সিমুলেশন</span>
+          <h1 className="text-6xl md:text-8xl font-black text-white italic leading-none tracking-tighter mb-4 drop-shadow-lg">
+            ধানের ডাক্তার <span className="text-yellow-400 block md:inline drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]">সিমুলেশন</span>
           </h1>
-          <p className="text-emerald-100/80 text-xl md:text-2xl font-medium max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/90 text-xl md:text-2xl font-medium max-w-2xl mx-auto leading-relaxed">
             আধুনিক প্রযুক্তির মাধ্যমে ধানের রোগ শনাক্তকরণ ও সঠিক ব্যবস্থাপনার এক রোমাঞ্চকর অভিজ্ঞতা।
           </p>
         </motion.div>
@@ -681,16 +681,16 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="glass-panel p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 shadow-2xl border-white/20"
+          className="bg-green-900/80 backdrop-blur-md p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 shadow-2xl border-2 border-yellow-500/30"
         >
           <div className="relative">
-            <div className="absolute inset-0 bg-emerald-500/20 blur-2xl rounded-full animate-pulse" />
+            <div className="absolute inset-0 bg-yellow-500/30 blur-2xl rounded-full animate-pulse" />
             <FarmerAvatar className="w-32 h-32 md:w-40 md:h-40 relative z-10" mood="normal" />
           </div>
           <div className="text-center md:text-left">
-            <h2 className="text-3xl font-black text-emerald-900 mb-3 italic">সালাম! আমি কৃষক রহিম।</h2>
-            <p className="text-slate-600 text-xl leading-relaxed font-medium">
-              আমার ধানের জমিতে একটি রহস্যময় সমস্যা দেখা দিয়েছে। সঠিক কারণ নির্ণয় করে বিজ্ঞানভিত্তিক সমাধান দিতে আমার সাথে মাঠে চলুন।
+            <h2 className="text-3xl font-black text-yellow-400 mb-3 italic">সালাম! আমি কৃষক রহিম।</h2>
+            <p className="text-white/90 text-xl leading-relaxed font-medium">
+              আমার ধানের জমিতে একটি <span className="text-red-400 font-bold">রহস্যময় সমস্যা</span> দেখা দিয়েছে। সঠিক কারণ নির্ণয় করে বিজ্ঞানভিত্তিক সমাধান দিতে আমার সাথে মাঠে চলুন।
             </p>
           </div>
         </motion.div>
@@ -702,7 +702,7 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
           transition={{ delay: 1.2 }}
           className="space-y-6"
         >
-          <h3 className="text-2xl font-black text-white italic">গেমের ধরন নির্বাচন করুন (Select Difficulty):</h3>
+          <h3 className="text-2xl font-black text-white italic">গেমের ধরন নির্বাচন করুন <span className="text-yellow-400">(Select Difficulty)</span>:</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {(Object.keys(DIFFICULTY_SETTINGS) as Difficulty[]).map((d) => {
               const settings = DIFFICULTY_SETTINGS[d];
@@ -713,15 +713,15 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
                   onClick={() => onDifficultyChange(d)}
                   className={`p-6 rounded-3xl border-4 transition-all text-left group relative overflow-hidden
                     ${isSelected 
-                      ? 'bg-emerald-500 border-emerald-400 text-white shadow-[0_0_30px_rgba(16,185,129,0.4)]' 
-                      : 'bg-white/10 border-white/10 text-emerald-100 hover:bg-white/20'}
+                      ? 'bg-yellow-500 border-yellow-400 text-green-950 shadow-[0_0_30px_rgba(250,204,21,0.5)]' 
+                      : 'bg-green-900/50 border-green-700/50 text-white hover:bg-green-800/50 hover:border-green-600'}
                   `}
                 >
-                  <div className={`font-black text-xl mb-1 ${isSelected ? 'text-white' : 'text-emerald-400'}`}>{settings.label}</div>
-                  <div className={`text-sm font-medium leading-tight ${isSelected ? 'text-emerald-50' : 'text-emerald-100/60'}`}>{settings.description}</div>
+                  <div className={`font-black text-xl mb-1 ${isSelected ? 'text-green-950' : 'text-yellow-400'}`}>{settings.label}</div>
+                  <div className={`text-sm font-medium leading-tight ${isSelected ? 'text-green-900' : 'text-white/70'}`}>{settings.description}</div>
                   {isSelected && (
                     <motion.div layoutId="diff-check" className="absolute top-4 right-4">
-                      <CheckCircle className="w-6 h-6 text-white" />
+                      <CheckCircle className="w-6 h-6 text-green-800" />
                     </motion.div>
                   )}
                 </button>
@@ -735,9 +735,9 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.6 }}
           onClick={onStart}
-          className="group relative bg-emerald-600 hover:bg-emerald-500 text-white px-16 py-6 rounded-[2rem] font-black text-2xl shadow-[0_20px_40px_-10px_rgba(5,150,105,0.5)] transition-all active:scale-95 flex items-center gap-4 mx-auto overflow-hidden"
+          className="group relative bg-red-600 hover:bg-red-500 text-white px-16 py-6 rounded-[2rem] font-black text-2xl shadow-[0_20px_40px_-10px_rgba(220,38,38,0.5)] transition-all active:scale-95 flex items-center gap-4 mx-auto overflow-hidden border-2 border-red-400"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
           সিমুলেশন শুরু করুন 
           <ChevronRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
         </motion.button>
