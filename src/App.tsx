@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Eye, Brain, Ruler, CloudSun, CheckCircle, 
@@ -6,8 +6,10 @@ import {
   AlertTriangle, ShieldCheck, Leaf, Bug, Sprout, 
   ChevronRight, RotateCcw, Activity, FlaskConical, Target,
   Volume2, VolumeX, Trophy, Star, Award, Medal, Zap, Lightbulb,
-  Cloud, Microscope, Thermometer, Sun, Hand, BookOpen, X
+  Cloud, Microscope, Thermometer, Sun, Hand, BookOpen, X,
+  Image, Info, AlertCircle
 } from 'lucide-react';
+import { RiceIssue, ALL_RICE_ISSUES, RICE_DISEASES, RICE_PESTS, RICE_DEFICIENCIES, IssueType } from './data/riceIssues';
 
 // --- Sound Constants ---
 const SOUND_URLS = {
@@ -77,6 +79,8 @@ interface GameState {
   unlockedAchievements: string[];
   difficulty: Difficulty;
   hintsUsed: number;
+  currentIssue: RiceIssue | null;
+  usedIssueIds: string[];
 }
 
 const ACHIEVEMENTS: Achievement[] = [
@@ -86,8 +90,20 @@ const ACHIEVEMENTS: Achievement[] = [
   { id: 'risk_analyst', title: 'ঝুঁকি বিশ্লেষক (Risk Analyst)', description: 'পরিবেশ ও আবহাওয়ার ঝুঁকি সঠিকভাবে বুঝতে পেরেছেন।', icon: CloudSun, color: 'text-yellow-500' },
   { id: 'ipm_strategist', title: 'আইপিএম বিশেষজ্ঞ (IPM Strategist)', description: 'সঠিক ও টেকসই বালাই ব্যবস্থাপনা গ্রহণ করেছেন।', icon: ShieldCheck, color: 'text-yellow-400' },
   { id: 'smart_farmer', title: 'স্মার্ট কৃষিবিদ (Smart Farmer)', description: '১০০/১০০ স্কোর নিয়ে সিমুলেশন সম্পন্ন করেছেন।', icon: Trophy, color: 'text-yellow-500' },
-  { id: 'quick_learner', title: 'দ্রুত শিক্ষার্থী (Quick Learner)', description: 'সফলভাবে সিমুলেশনটি সম্পন্ন করেছেন।', icon: Zap, color: 'text-yellow-400' }
+  { id: 'quick_learner', title: 'দ্রুত শিক্ষার্থী (Quick Learner)', description: 'সফলভাবে সিমুলেশনটি সম্পন্ন করেছেন।', icon: Zap, color: 'text-yellow-400' },
+  { id: 'disease_expert', title: 'রোগ বিশেষজ্ঞ (Disease Expert)', description: 'ধানের রোগ সঠিকভাবে শনাক্ত করেছেন।', icon: FlaskConical, color: 'text-red-400' },
+  { id: 'pest_detector', title: 'পোকা সনাক্তকারী (Pest Detector)', description: 'ধানের ক্ষতিকর পোকা সঠিকভাবে চিহ্নিত করেছেন।', icon: Bug, color: 'text-yellow-400' },
+  { id: 'nutrient_specialist', title: 'পুষ্টি বিশেষজ্ঞ (Nutrient Specialist)', description: 'পুষ্টির অভাব সঠিকভাবে নির্ণয় করেছেন।', icon: Leaf, color: 'text-green-400' }
 ];
+
+// Helper function to select a random issue
+function selectRandomIssue(excludeIds: string[] = []): RiceIssue {
+  const availableIssues = ALL_RICE_ISSUES.filter(issue => !excludeIds.includes(issue.id));
+  if (availableIssues.length === 0) {
+    return ALL_RICE_ISSUES[Math.floor(Math.random() * ALL_RICE_ISSUES.length)];
+  }
+  return availableIssues[Math.floor(Math.random() * availableIssues.length)];
+}
 
 // --- CABI Terminology Constants ---
 const CABI_TERMS = {
@@ -480,7 +496,9 @@ export default function App() {
     findings: [],
     unlockedAchievements: [],
     difficulty: 'easy',
-    hintsUsed: 0
+    hintsUsed: 0,
+    currentIssue: null,
+    usedIssueIds: []
   });
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showAchievement, setShowAchievement] = useState<Achievement | null>(null);
@@ -531,7 +549,29 @@ export default function App() {
 
   const resetGame = () => {
     playSound('click', soundEnabled);
-    setGameState({ phase: 'intro', score: 0, findings: [], unlockedAchievements: [], difficulty: 'easy', hintsUsed: 0 });
+    // Select a new random issue for the next game
+    const newIssue = selectRandomIssue([]);
+    setGameState({ 
+      phase: 'intro', 
+      score: 0, 
+      findings: [], 
+      unlockedAchievements: [], 
+      difficulty: 'easy', 
+      hintsUsed: 0,
+      currentIssue: null,
+      usedIssueIds: []
+    });
+  };
+
+  const startGameWithIssue = () => {
+    playSound('click', soundEnabled);
+    const newIssue = selectRandomIssue(gameState.usedIssueIds);
+    setGameState(prev => ({ 
+      ...prev, 
+      phase: 'observe',
+      currentIssue: newIssue,
+      usedIssueIds: [...prev.usedIssueIds, newIssue.id]
+    }));
   };
 
   const setDifficulty = (difficulty: Difficulty) => {
@@ -617,12 +657,12 @@ export default function App() {
 
       <main className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         <AnimatePresence mode="wait">
-          {gameState.phase === 'intro' && <IntroScreen key="intro" onStart={() => { playSound('click', soundEnabled); updatePhase('observe'); }} difficulty={gameState.difficulty} onDifficultyChange={setDifficulty} />}
-          {gameState.phase === 'observe' && <PhaseObserve key="observe" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('diagnose'); }} difficulty={gameState.difficulty} />}
-          {gameState.phase === 'diagnose' && <PhaseDiagnose key="diagnose" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('measure'); }} difficulty={gameState.difficulty} />}
-          {gameState.phase === 'measure' && <PhaseMeasure key="measure" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('think'); }} difficulty={gameState.difficulty} />}
-          {gameState.phase === 'think' && <PhaseThink key="think" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('act'); }} difficulty={gameState.difficulty} />}
-          {gameState.phase === 'act' && <PhaseAct key="act" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('summary'); }} difficulty={gameState.difficulty} />}
+          {gameState.phase === 'intro' && <IntroScreen key="intro" onStart={startGameWithIssue} difficulty={gameState.difficulty} onDifficultyChange={setDifficulty} />}
+          {gameState.phase === 'observe' && <PhaseObserve key="observe" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('diagnose'); }} difficulty={gameState.difficulty} currentIssue={gameState.currentIssue} />}
+          {gameState.phase === 'diagnose' && <PhaseDiagnose key="diagnose" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('measure'); }} difficulty={gameState.difficulty} currentIssue={gameState.currentIssue} />}
+          {gameState.phase === 'measure' && <PhaseMeasure key="measure" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('think'); }} difficulty={gameState.difficulty} currentIssue={gameState.currentIssue} />}
+          {gameState.phase === 'think' && <PhaseThink key="think" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('act'); }} difficulty={gameState.difficulty} currentIssue={gameState.currentIssue} />}
+          {gameState.phase === 'act' && <PhaseAct key="act" soundEnabled={soundEnabled} score={gameState.score} hintsUsed={gameState.hintsUsed} onUseHint={() => deductScore(DIFFICULTY_SETTINGS[gameState.difficulty].hintCost)} onUnlockAchievement={unlockAchievement} onComplete={(f) => { addFinding(f); addScore(20); updatePhase('summary'); }} difficulty={gameState.difficulty} currentIssue={gameState.currentIssue} />}
           {gameState.phase === 'summary' && <SummaryScreen key="summary" state={gameState} onRestart={resetGame} soundEnabled={soundEnabled} />}
         </AnimatePresence>
       </main>
@@ -746,7 +786,7 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
   );
 }
 
-function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; key?: string }) {
+function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty, currentIssue }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; currentIssue: RiceIssue | null; key?: string }) {
   const getHotspots = (d: Difficulty) => {
     if (d === 'easy') return [2, 12, 24];
     if (d === 'medium') return [2, 7, 18, 24];
@@ -757,6 +797,10 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
   const [avatarPos, setAvatarPos] = useState<number | null>(null);
   const [isWalking, setIsWalking] = useState(false);
   const [justFound, setJustFound] = useState(false);
+
+  // Get issue-specific information
+  const issueTypeLabel = currentIssue?.type === 'disease' ? 'রোগ' : currentIssue?.type === 'pest' ? 'পোকা' : 'পুষ্টির অভাব';
+  const issueHint = currentIssue ? currentIssue.symptoms[0] : 'মাঠের কোণগুলোতে এবং মাঝখানে ভালো করে লক্ষ্য করুন।';
 
   useEffect(() => {
     if (found.length === 5) {
@@ -791,7 +835,7 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
             <Eye className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.observe}
           </h2>
           <HintButton 
-            hint="মাঠের কোণগুলোতে এবং মাঝখানে ভালো করে লক্ষ্য করুন। 'W' প্যাটার্নে হাঁটলে সবকটি লক্ষণ পাওয়া সহজ হয়।" 
+            hint={currentIssue ? `${currentIssue.symptomDetails.leaf} ${currentIssue.symptomDetails.overall}` : "মাঠের কোণগুলোতে এবং মাঝখানে ভালো করে লক্ষ্য করুন। 'W' প্যাটার্নে হাঁটলে সবকটি লক্ষণ পাওয়া সহজ হয়।"} 
             onUse={onUseHint} 
             score={score} 
             soundEnabled={soundEnabled} 
@@ -799,7 +843,7 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
             hintsUsed={hintsUsed}
           />
         </div>
-        <AvatarDialog text={`আসুন মাঠের গভীরে যাই। 'W' প্যাটার্নে হেঁটে ${hotspots.length}টি পয়েন্ট থেকে নমুনা সংগ্রহ করি। মাটির ঘ্রাণ আর ধানের পাতার অবস্থা আমাদের অনেক কিছু বলবে।`} mood="normal" />
+        <AvatarDialog text={`আসুন মাঠের গভীরে যাই। 'W' প্যাটার্নে হেঁটে ${hotspots.length}টি পয়েন্ট থেকে নমুনা সংগ্রহ করি। ${currentIssue ? `${currentIssue.bengaliName}-এর লক্ষণ খুঁজে বের করুন।` : 'মাটির ঘ্রাণ আর ধানের পাতার অবস্থা আমাদের অনেক কিছু বলবে।'}`} mood="normal" />
       </div>
 
       <div className="relative aspect-[16/9] md:aspect-[21/9] bg-green-800 rounded-[2rem] shadow-2xl overflow-hidden border-4 border-yellow-500/30">
@@ -867,7 +911,7 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
         
         <button
           disabled={found.length < hotspots.length}
-          onClick={() => onComplete("মাঠে 'W' প্যাটার্নে হেঁটে দেখা গেছে কিছু গাছের পাতা হলুদ হয়ে শুকিয়ে যাচ্ছে।")}
+          onClick={() => onComplete(currentIssue ? `মাঠে 'W' প্যাটার্নে হেঁটে দেখা গেছে: ${currentIssue.symptoms.slice(0, 2).join(', ')}` : "মাঠে 'W' প্যাটার্নে হেঁটে দেখা গেছে কিছু গাছের পাতা হলুদ হয়ে শুকিয়ে যাচ্ছে।")}
           className={`group px-10 py-4 rounded-2xl font-black text-lg flex items-center gap-3 transition-all transform active:scale-95
             ${found.length === hotspots.length 
               ? 'bg-red-600 text-white hover:bg-red-500 shadow-[0_10px_20px_-5px_rgba(220,38,38,0.4)]' 
@@ -882,31 +926,63 @@ function PhaseObserve({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
   );
 }
 
-function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; key?: string }) {
+function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty, currentIssue }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; currentIssue: RiceIssue | null; key?: string }) {
   const [step, setStep] = useState(0);
   const [selectedCause, setSelectedCause] = useState<string | null>(null);
   const [scanning, setScanning] = useState(false);
   const [mistakeMade, setMistakeMade] = useState(false);
 
-  const getCauses = (d: Difficulty) => {
-    const base = [
-      { id: 'abiotic', label: 'অজীবজ (Abiotic)', desc: 'পুষ্টির অভাব বা খরা', icon: ThermometerSun, correct: false },
-      { id: 'biotic_pest', label: 'জীবজ - পোকা (Pest)', desc: 'পোকামাকড়ের আক্রমণ', icon: Bug, correct: false },
-      { id: 'biotic_disease', label: 'জীবজ - রোগ (Disease)', desc: 'ব্যাকটেরিয়া জনিত রোগ', icon: FlaskConical, correct: true },
-    ];
-    if (d === 'easy') return base;
-    if (d === 'medium') return [
-      ...base,
-      { id: 'fungal', label: 'ছত্রাক (Fungal)', desc: 'ছত্রাক জনিত আক্রমণ', icon: Sprout, correct: false },
-    ];
-    return [
-      ...base,
-      { id: 'fungal', label: 'ছত্রাক (Fungal)', desc: 'ছত্রাক জনিত আক্রমণ', icon: Sprout, correct: false },
-      { id: 'viral', label: 'ভাইরাস (Viral)', desc: 'ভাইরাস জনিত রোগ', icon: Activity, correct: false },
-    ];
+  // Generate diagnosis options based on current issue type
+  const getDiagnosisOptions = () => {
+    const correctType = currentIssue?.type || 'disease';
+    const correctId = currentIssue?.id || 'blb';
+    
+    // Get wrong options from other categories
+    const wrongDiseases = RICE_DISEASES.filter(d => d.id !== correctId).slice(0, 2);
+    const wrongPests = RICE_PESTS.slice(0, 2);
+    const wrongDeficiencies = RICE_DEFICIENCIES.slice(0, 2);
+    
+    // Create options based on correct type
+    const options = [];
+    
+    // Add the correct answer
+    options.push({
+      id: correctId,
+      label: currentIssue?.bengaliName || 'ব্যাকটেরিয়া জনিত ধসা রোগ (BLB)',
+      desc: currentIssue?.type === 'disease' ? 'রোগ জনিত সমস্যা' : currentIssue?.type === 'pest' ? 'পোকার আক্রমণ' : 'পুষ্টির অভাব',
+      icon: currentIssue?.type === 'disease' ? FlaskConical : currentIssue?.type === 'pest' ? Bug : Leaf,
+      correct: true
+    });
+    
+    // Add wrong options
+    if (correctType === 'disease') {
+      wrongPests.forEach(p => {
+        options.push({ id: p.id, label: p.bengaliName, desc: 'পোকা জনিত সমস্যা', icon: Bug, correct: false });
+      });
+      wrongDeficiencies.forEach(d => {
+        options.push({ id: d.id, label: d.bengaliName, desc: 'পুষ্টির অভাব', icon: Leaf, correct: false });
+      });
+    } else if (correctType === 'pest') {
+      wrongDiseases.forEach(d => {
+        options.push({ id: d.id, label: d.bengaliName, desc: 'রোগ জনিত সমস্যা', icon: FlaskConical, correct: false });
+      });
+      wrongDeficiencies.forEach(d => {
+        options.push({ id: d.id, label: d.bengaliName, desc: 'পুষ্টির অভাব', icon: Leaf, correct: false });
+      });
+    } else {
+      wrongDiseases.forEach(d => {
+        options.push({ id: d.id, label: d.bengaliName, desc: 'রোগ জনিত সমস্যা', icon: FlaskConical, correct: false });
+      });
+      wrongPests.forEach(p => {
+        options.push({ id: p.id, label: p.bengaliName, desc: 'পোকা জনিত সমস্যা', icon: Bug, correct: false });
+      });
+    }
+    
+    // Shuffle options
+    return options.sort(() => Math.random() - 0.5);
   };
 
-  const causes = getCauses(difficulty);
+  const causes = useMemo(() => getDiagnosisOptions(), [currentIssue]);
 
   const handleScan = () => {
     setScanning(true);
@@ -921,7 +997,17 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
     setSelectedCause(cause.id);
     if (cause.correct) {
       playSound('success', soundEnabled);
-      if (!mistakeMade) onUnlockAchievement('sharp_eye');
+      if (!mistakeMade) {
+        // Award specific achievement based on issue type
+        if (currentIssue?.type === 'disease') {
+          onUnlockAchievement('disease_expert');
+        } else if (currentIssue?.type === 'pest') {
+          onUnlockAchievement('pest_detector');
+        } else {
+          onUnlockAchievement('nutrient_specialist');
+        }
+        onUnlockAchievement('sharp_eye');
+      }
     } else {
       playSound('error', soundEnabled);
       setMistakeMade(true);
@@ -936,7 +1022,7 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
             <Brain className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.diagnose}
           </h2>
           <HintButton 
-            hint="পাতার কিনারা বরাবর ঢেউখেলানো হলুদ দাগ এবং শুকিয়ে যাওয়া অংশ ব্যাকটেরিয়া জনিত ধসা রোগের (BLB) প্রধান লক্ষণ।" 
+            hint={currentIssue ? `${currentIssue.symptomDetails.leaf} এটি ${currentIssue.type === 'disease' ? 'একটি রোগ' : currentIssue.type === 'pest' ? 'পোকার আক্রমণ' : 'পুষ্টির অভাব'}।` : "পাতার কিনারা বরাবর ঢেউখেলানো হলুদ দাগ এবং শুকিয়ে যাওয়া অংশ ব্যাকটেরিয়া জনিত ধসা রোগের (BLB) প্রধান লক্ষণ।"} 
             onUse={onUseHint} 
             score={score} 
             soundEnabled={soundEnabled} 
@@ -1012,23 +1098,23 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
                   <div className="font-mono text-yellow-400 text-xs animate-pulse">LIVE FEED</div>
                 </div>
                 <div className="space-y-4">
-                  {[
-                    { t: "পাতার কিনারা বরাবর V-shape হলুদ দাগ", icon: <CheckCircle className="text-yellow-400" /> },
-                    { t: "দাগগুলো ক্রমশ নিচের দিকে ছড়াচ্ছে", icon: <CheckCircle className="text-yellow-400" /> },
-                    { t: "কোনো পোকা বা পোকার মল দেখা যাচ্ছে না", icon: <AlertTriangle className="text-red-400" /> },
-                    { t: "সকালে পাতার ডগায় আঠালো ব্যাকটেরিয়াল রস", icon: <CheckCircle className="text-yellow-400" /> }
-                  ].map((item, i) => (
+                  {(currentIssue ? currentIssue.symptoms.slice(0, 4) : [
+                    "পাতার কিনারা বরাবর V-shape হলুদ দাগ",
+                    "দাগগুলো ক্রমশ নিচের দিকে ছড়াচ্ছে",
+                    "কোনো পোকা বা পোকার মল দেখা যাচ্ছে না",
+                    "সকালে পাতার ডগায় আঠালো ব্যাকটেরিয়াল রস"
+                  ]).map((symptom, i) => (
                     <motion.div 
                       key={i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.2 }}
                       className="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border border-yellow-500/20 hover:bg-white/10 transition-colors"
                     >
-                      <div className="bg-green-800 p-2 rounded-lg">{item.icon}</div>
-                      <span className="text-white font-bold text-lg">{item.t}</span>
+                      <div className="bg-green-800 p-2 rounded-lg"><CheckCircle className="text-yellow-400" /></div>
+                      <span className="text-white font-bold text-lg">{symptom}</span>
                     </motion.div>
                   ))}
                 </div>
                 <div className="mt-8 pt-6 border-t border-yellow-500/20 flex justify-between items-center">
-                  <div className="text-yellow-500/50 font-mono text-[10px]">SCAN_ID: CABI_BLB_092</div>
+                  <div className="text-yellow-500/50 font-mono text-[10px]">SCAN_ID: {currentIssue?.id?.toUpperCase() || 'CABI_BLB_092'}</div>
                   <div className="flex gap-1">
                     <div className="w-1 h-1 bg-yellow-500 rounded-full animate-ping" />
                     <div className="w-1 h-1 bg-yellow-500 rounded-full animate-ping delay-75" />
@@ -1075,18 +1161,18 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
                 {causes.find(c => c.id === selectedCause)?.correct ? (
                   <div className="bg-green-700 text-white p-6 rounded-2xl shadow-lg flex items-start gap-4 border border-yellow-500/30">
                     <ShieldCheck className="w-8 h-8 shrink-0 text-yellow-400" />
-                    <p className="font-bold text-lg leading-snug">সঠিক বিশ্লেষণ! এটি ব্যাকটেরিয়া জনিত রোগ (Bacterial Leaf Blight - BLB)। আপনি একজন দক্ষ প্ল্যান্ট ডক্টর!</p>
+                    <p className="font-bold text-lg leading-snug">সঠিক বিশ্লেষণ! এটি {currentIssue?.bengaliName || 'ব্যাকটেরিয়া জনিত রোগ'}। আপনি একজন দক্ষ প্ল্যান্ট ডক্টর!</p>
                   </div>
                 ) : (
                   <div className="bg-red-600 text-white p-6 rounded-2xl shadow-lg flex items-start gap-4">
                     <AlertTriangle className="w-8 h-8 shrink-0" />
-                    <p className="font-bold text-lg leading-snug">ভুল বিশ্লেষণ। লক্ষণগুলো আবার ভালো করে দেখুন। এটি একটি সংক্রামক রোগ।</p>
+                    <p className="font-bold text-lg leading-snug">ভুল বিশ্লেষণ। লক্ষণগুলো আবার ভালো করে দেখুন। {currentIssue ? `এটি ${currentIssue.type === 'disease' ? 'একটি রোগ' : currentIssue.type === 'pest' ? 'পোকার আক্রমণ' : 'পুষ্টির অভাব'}` : 'এটি একটি সংক্রামক রোগ'}।</p>
                   </div>
                 )}
                 
                 {causes.find(c => c.id === selectedCause)?.correct && (
                   <button
-                    onClick={() => onComplete("লক্ষণ বিশ্লেষণ করে ব্যাকটেরিয়া জনিত রোগ (BLB) শনাক্ত করা হয়েছে।")}
+                    onClick={() => onComplete(`লক্ষণ বিশ্লেষণ করে ${currentIssue?.bengaliName || 'ব্যাকটেরিয়া জনিত রোগ'} শনাক্ত করা হয়েছে।`)}
                     className="w-full bg-red-600 text-white font-black py-5 rounded-2xl shadow-2xl hover:bg-red-500 transition-colors flex justify-center items-center gap-3 text-xl"
                   >
                     পরবর্তী ধাপে যান <ChevronRight className="w-6 h-6" />
@@ -1101,7 +1187,7 @@ function PhaseDiagnose({ onComplete, soundEnabled, score, hintsUsed, onUseHint, 
   );
 }
 
-function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; key?: string }) {
+function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty, currentIssue }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; currentIssue: RiceIssue | null; key?: string }) {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [assessed, setAssessed] = useState(false);
   const [mistakeMade, setMistakeMade] = useState(false);
@@ -1153,7 +1239,7 @@ function PhaseMeasure({ onComplete, soundEnabled, score, hintsUsed, onUseHint, o
             hintsUsed={hintsUsed}
           />
         </div>
-        <AvatarDialog text="রোগ তো বুঝলাম, কিন্তু ক্ষতির পরিমাণ কতটুকু? চলুন ১২টি গুচ্ছের মধ্যে কয়টি আক্রান্ত হয়েছে তা চিহ্নিত করি। হলুদ দাগযুক্ত গাছগুলো খুঁজে বের করুন।" mood="thinking" />
+        <AvatarDialog text={`রোগ তো বুঝলাম, কিন্তু ক্ষতির পরিমাণ কতটুকু? চলুন গুচ্ছগুলোর মধ্যে কয়টি আক্রান্ত হয়েছে তা চিহ্নিত করি। ${currentIssue ? currentIssue.symptomDetails.leaf : 'হলুদ দাগযুক্ত'} গাছগুলো খুঁজে বের করুন।`} mood="thinking" />
       </div>
 
       <div className="relative bg-green-900/90 rounded-[2.5rem] p-8 shadow-2xl border-4 border-yellow-500/30 overflow-hidden">
@@ -1347,7 +1433,7 @@ const WEATHER_SCENARIOS: WeatherScenario[] = [
   }
 ];
 
-function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; key?: string }) {
+function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty, currentIssue }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; currentIssue: RiceIssue | null; key?: string }) {
   const [selectedRisk, setSelectedRisk] = useState<number | null>(null);
   const [mistakeMade, setMistakeMade] = useState(false);
   const [scenario] = useState<WeatherScenario>(() => {
@@ -1518,24 +1604,29 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
   );
 }
 
-function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; key?: string }) {
+function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty, currentIssue }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; currentIssue: RiceIssue | null; key?: string }) {
   const [selectedAction, setSelectedAction] = useState<number | null>(null);
   const [mistakeMade, setMistakeMade] = useState(false);
 
   const getActions = (d: Difficulty) => {
+    // Get management options based on issue type
+    const managementOptions = currentIssue?.management || ['সাংস্কৃতিক দমন পদ্ধতি অবলম্বন করা'];
+    const issueType = currentIssue?.type || 'disease';
+    const issueName = currentIssue?.bengaliName || 'এই সমস্যা';
+    
     const base = [
-      { id: 1, type: 'chemical', label: 'রাসায়নিক দমন (Chemical)', desc: 'দোকান থেকে কড়া কীটনাশক কিনে স্প্রে করা।', correct: false, feedback: 'ভুল সিদ্ধান্ত! এটি ব্যাকটেরিয়া জনিত রোগ, কীটনাশক (যা পোকা মারে) দিলে কোনো কাজ হবে না, বরং কৃষকের আর্থিক ক্ষতি হবে।', icon: FlaskConical },
-      { id: 2, type: 'cultural', label: 'সাংস্কৃতিক দমন (Cultural - IPM)', desc: 'ইউরিয়া সার প্রয়োগ বন্ধ করা, জমির পানি বের করে দেওয়া এবং পটাশ সার প্রয়োগ করা।', correct: true, feedback: 'সঠিক সিদ্ধান্ত! BLB রোগের ক্ষেত্রে ইউরিয়া বন্ধ করা এবং জমি শুকিয়ে ফেলা সবচেয়ে কার্যকরী প্রাথমিক পদক্ষেপ। পটাশ গাছের রোগ প্রতিরোধ ক্ষমতা বাড়ায়।', icon: ShieldCheck },
-      { id: 3, type: 'biological', label: 'জৈব দমন (Biological)', desc: 'জমিতে উপকারী পোকা (যেমন লেডিবার্ড বিটল) ছেড়ে দেওয়া।', correct: false, feedback: 'ভুল সিদ্ধান্ত। উপকারী পোকা ক্ষতিকর পোকা দমনে সাহায্য করে, কিন্তু এটি একটি ব্যাকটেরিয়া জনিত রোগ।', icon: Bug },
+      { id: 1, type: 'chemical', label: 'রাসায়নিক দমন (Chemical)', desc: 'দোকান থেকে কড়া কীটনাশক কিনে স্প্রে করা।', correct: false, feedback: `ভুল সিদ্ধান্ত! ${issueType === 'disease' ? 'এটি একটি রোগ' : issueType === 'pest' ? 'পোকার জন্য সঠিক কীটনাশক প্রয়োজন' : 'পুষ্টির অভাবে সার প্রয়োজন'}, অন্য পদক্ষেপ নিন।`, icon: FlaskConical },
+      { id: 2, type: 'cultural', label: 'সাংস্কৃতিক দমন (Cultural - IPM)', desc: managementOptions[0] || 'ইউরিয়া সার প্রয়োগ বন্ধ করা, জমির পানি বের করে দেওয়া।', correct: true, feedback: `সঠিক সিদ্ধান্ত! ${issueName}-এর ক্ষেত্রে ${managementOptions[0]} সবচেয়ে কার্যকরী পদক্ষেপ।`, icon: ShieldCheck },
+      { id: 3, type: 'biological', label: 'জৈব দমন (Biological)', desc: 'জমিতে উপকারী পোকা (যেমন লেডিবার্ড বিটল) ছেড়ে দেওয়া।', correct: issueType === 'pest', feedback: issueType === 'pest' ? 'সঠিক সিদ্ধান্ত! জৈবিক দমন পোকা নিয়ন্ত্রণে কার্যকর।' : `ভুল সিদ্ধান্ত। উপকারী পোকা ক্ষতিকর পোকা দমনে সাহায্য করে, কিন্তু ${issueType === 'disease' ? 'রোগের' : 'পুষ্টির'} ক্ষেত্রে এটি কার্যকর নয়।`, icon: Bug },
     ];
     if (d === 'easy') return base;
     if (d === 'medium') return [
       ...base,
-      { id: 4, type: 'herbal', label: 'ভেষজ দমন (Herbal)', desc: 'নিম পাতার রস স্প্রে করা।', correct: false, feedback: 'নিম পাতা পোকা দমনে কাজ করে, কিন্তু BLB এর মতো ব্যাকটেরিয়া দমনে এটি যথেষ্ট নয়।', icon: Leaf },
+      { id: 4, type: 'herbal', label: 'ভেষজ দমন (Herbal)', desc: 'নিম পাতার রস স্প্রে করা।', correct: false, feedback: `নিম পাতা পোকা দমনে কাজ করে, কিন্তু ${issueType === 'disease' ? 'রোগের' : 'পুষ্টির অভাবের'} ক্ষেত্রে এটি যথেষ্ট নয়।`, icon: Leaf },
     ];
     return [
       ...base,
-      { id: 4, type: 'herbal', label: 'ভেষজ দমন (Herbal)', desc: 'নিম পাতার রস স্প্রে করা।', correct: false, feedback: 'নিম পাতা পোকা দমনে কাজ করে, কিন্তু BLB এর মতো ব্যাকটেরিয়া দমনে এটি যথেষ্ট নয়।', icon: Leaf },
+      { id: 4, type: 'herbal', label: 'ভেষজ দমন (Herbal)', desc: 'নিম পাতার রস স্প্রে করা।', correct: false, feedback: `নিম পাতা পোকা দমনে কাজ করে, কিন্তু ${issueType === 'disease' ? 'রোগের' : 'পুষ্টির অভাবের'} ক্ষেত্রে এটি যথেষ্ট নয়।`, icon: Leaf },
       { id: 5, type: 'mechanical', label: 'যান্ত্রিক দমন (Mechanical)', desc: 'আক্রান্ত গাছগুলো হাত দিয়ে টেনে তুলে ফেলা।', correct: false, feedback: 'পুরো মাঠের আক্রান্ত গাছ তুলে ফেলা সম্ভব নয় এবং এটি রোগ ছড়াতে সাহায্য করতে পারে।', icon: Hand },
     ];
   };
@@ -1659,7 +1750,7 @@ function PhaseAct({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnl
                 
                 {actions.find(a => a.id === selectedAction)?.correct && (
                   <button
-                    onClick={() => onComplete("ব্যবস্থাপনা: ইউরিয়া বন্ধ, জমি শুকানো এবং পটাশ প্রয়োগের সিদ্ধান্ত গৃহীত।")}
+                    onClick={() => onComplete(`ব্যবস্থাপনা: ${currentIssue?.management?.[0] || 'সাংস্কৃতিক দমন পদ্ধতি'} প্রয়োগের সিদ্ধান্ত গৃহীত।`)}
                     className="w-full bg-red-600 text-white font-black py-6 px-10 rounded-2xl shadow-2xl hover:bg-red-500 transition-all flex justify-center items-center gap-4 text-2xl group"
                   >
                     সিমুলেশন রিপোর্ট দেখুন 
