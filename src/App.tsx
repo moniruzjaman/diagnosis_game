@@ -567,7 +567,7 @@ export default function App() {
           <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
             <div className="flex items-center gap-2 text-yellow-400 font-bold text-lg">
               <Leaf className="w-6 h-6" />
-              <span>স্মার্ট কৃষক সিমুলেশন</span>
+              <span>ফসল ফতোয়া (Crop Call)</span>
             </div>
             <div className="flex items-center gap-4 text-sm font-medium text-white">
               <button 
@@ -667,13 +667,13 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
           transition={{ delay: 0.5, type: "spring" }}
         >
           <div className="inline-block px-6 py-2 bg-yellow-500/30 backdrop-blur-md border-2 border-yellow-400/60 rounded-full text-yellow-300 font-black text-sm uppercase tracking-[0.3em] mb-6">
-            Smart Farmer Simulation 2.0
+            🌾 Crop Call - কৃষি সিদ্ধান্ত গেম 🌾
           </div>
           <h1 className="text-6xl md:text-8xl font-black text-white italic leading-none tracking-tighter mb-4 drop-shadow-lg">
-            ধানের ডাক্তার <span className="text-yellow-400 block md:inline drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]">সিমুলেশন</span>
+            ফসল ফতোয়া <span className="text-yellow-400 block md:inline drop-shadow-[0_0_30px_rgba(250,204,21,0.5)]">(Crop Call)</span>
           </h1>
           <p className="text-white/90 text-xl md:text-2xl font-medium max-w-2xl mx-auto leading-relaxed">
-            আধুনিক প্রযুক্তির মাধ্যমে ধানের রোগ শনাক্তকরণ ও সঠিক ব্যবস্থাপনার এক রোমাঞ্চকর অভিজ্ঞতা।
+            🎯 আপনার ফসল, আপনার সিদ্ধান্ত! ধানের রোগ শনাক্তকরণ ও সঠিক ব্যবস্থাপনার রোমাঞ্চকর গেম।
           </p>
         </motion.div>
 
