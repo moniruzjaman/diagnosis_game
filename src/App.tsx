@@ -672,6 +672,133 @@ export default function App() {
   );
 }
 
+// --- Collapsible Instructions Guide ---
+const InstructionsGuide = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div className="w-full max-w-2xl mx-auto mb-8">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full bg-green-800/50 backdrop-blur-md border-2 border-yellow-500/30 rounded-2xl p-4 flex items-center justify-between group hover:bg-green-800/70 transition-all"
+      >
+        <div className="flex items-center gap-3">
+          <div className="bg-yellow-500 text-green-950 p-2 rounded-xl">
+            <BookOpen className="w-5 h-5" />
+          </div>
+          <span className="font-bold text-yellow-400">কিভাবে খেলবেন? (How to Play)</span>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ChevronRight className="w-5 h-5 text-yellow-400 rotate-90" />
+        </motion.div>
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="bg-green-900/80 backdrop-blur-md border-2 border-yellow-500/30 rounded-b-2xl p-6 mt-1 space-y-4">
+              {/* Game Overview */}
+              <div className="space-y-2">
+                <h3 className="font-black text-yellow-400 flex items-center gap-2">
+                  <Target className="w-5 h-5" /> গেমের লক্ষ্য
+                </h3>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  এই গেমে আপনি একজন কৃষি বিশেষজ্ঞ হিসেবে ধান ক্ষেতের সমস্যা নির্ণয় ও সমাধান করবেন। প্রতিবার নতুন রোগ, পোকা বা পুষ্টির অভাবের সমস্যা এলোমেলোভাবে আসবে।
+                </p>
+              </div>
+              
+              {/* 5 Phases */}
+              <div className="space-y-2">
+                <h3 className="font-black text-yellow-400 flex items-center gap-2">
+                  <Activity className="w-5 h-5" /> ৫টি ধাপ (5 Phases)
+                </h3>
+                <div className="grid gap-2">
+                  <div className="bg-green-800/50 p-3 rounded-xl flex items-start gap-3">
+                    <div className="bg-yellow-500 text-green-950 w-6 h-6 rounded-full flex items-center justify-center font-black text-sm shrink-0">১</div>
+                    <div>
+                      <div className="font-bold text-white text-sm">পর্যবেক্ষণ (Observe)</div>
+                      <div className="text-white/60 text-xs">মাঠে 'W' প্যাটার্নে হেঁটে লক্ষণ খুঁজুন</div>
+                    </div>
+                  </div>
+                  <div className="bg-green-800/50 p-3 rounded-xl flex items-start gap-3">
+                    <div className="bg-yellow-500 text-green-950 w-6 h-6 rounded-full flex items-center justify-center font-black text-sm shrink-0">২</div>
+                    <div>
+                      <div className="font-bold text-white text-sm">নির্ণয় (Diagnose)</div>
+                      <div className="text-white/60 text-xs">লক্ষণ বিশ্লেষণ করে সমস্যা চিহ্নিত করুন</div>
+                    </div>
+                  </div>
+                  <div className="bg-green-800/50 p-3 rounded-xl flex items-start gap-3">
+                    <div className="bg-yellow-500 text-green-950 w-6 h-6 rounded-full flex items-center justify-center font-black text-sm shrink-0">৩</div>
+                    <div>
+                      <div className="font-bold text-white text-sm">পরিমাপ (Measure)</div>
+                      <div className="text-white/60 text-xs">আক্রান্ত গাছের সংখ্যা গণনা করুন</div>
+                    </div>
+                  </div>
+                  <div className="bg-green-800/50 p-3 rounded-xl flex items-start gap-3">
+                    <div className="bg-yellow-500 text-green-950 w-6 h-6 rounded-full flex items-center justify-center font-black text-sm shrink-0">৪</div>
+                    <div>
+                      <div className="font-bold text-white text-sm">বিশ্লেষণ (Think)</div>
+                      <div className="text-white/60 text-xs">আবহাওয়ার ঝুঁকি মূল্যায়ন করুন</div>
+                    </div>
+                  </div>
+                  <div className="bg-green-800/50 p-3 rounded-xl flex items-start gap-3">
+                    <div className="bg-yellow-500 text-green-950 w-6 h-6 rounded-full flex items-center justify-center font-black text-sm shrink-0">৫</div>
+                    <div>
+                      <div className="font-bold text-white text-sm">পদক্ষেপ (Act)</div>
+                      <div className="text-white/60 text-xs">IPM অনুযায়ী সঠিক ব্যবস্থাপনা বেছে নিন</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Tips */}
+              <div className="space-y-2">
+                <h3 className="font-black text-yellow-400 flex items-center gap-2">
+                  <Lightbulb className="w-5 h-5" /> টিপস
+                </h3>
+                <ul className="text-white/80 text-sm space-y-1">
+                  <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400" /> এনসাইক্লোপিডিয়া থেকে শিখুন</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400" /> হিন্ট ব্যবহার করলে পয়েন্ট কমবে</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400" /> প্রতিবার নতুন সমস্যা আসবে</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-400" /> কঠিন মোডে বেশি পয়েন্ট পাবেন</li>
+                </ul>
+              </div>
+              
+              {/* Issue Types */}
+              <div className="grid grid-cols-3 gap-2 pt-2">
+                <div className="bg-red-500/20 border border-red-500/30 p-2 rounded-xl text-center">
+                  <FlaskConical className="w-6 h-6 text-red-400 mx-auto" />
+                  <div className="text-xs text-white font-medium mt-1">রোগ</div>
+                  <div className="text-[10px] text-white/50">৫টি</div>
+                </div>
+                <div className="bg-yellow-500/20 border border-yellow-500/30 p-2 rounded-xl text-center">
+                  <Bug className="w-6 h-6 text-yellow-400 mx-auto" />
+                  <div className="text-xs text-white font-medium mt-1">পোকা</div>
+                  <div className="text-[10px] text-white/50">৫টি</div>
+                </div>
+                <div className="bg-green-500/20 border border-green-500/30 p-2 rounded-xl text-center">
+                  <Leaf className="w-6 h-6 text-green-400 mx-auto" />
+                  <div className="text-xs text-white font-medium mt-1">পুষ্টি</div>
+                  <div className="text-[10px] text-white/50">৮টি</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 // --- Phase Components ---
 
 function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () => void; difficulty: Difficulty; onDifficultyChange: (d: Difficulty) => void; key?: string }) {
@@ -733,6 +860,15 @@ function IntroScreen({ onStart, difficulty, onDifficultyChange }: { onStart: () 
               আমার ধানের জমিতে একটি <span className="text-red-400 font-bold">রহস্যময় সমস্যা</span> দেখা দিয়েছে। সঠিক কারণ নির্ণয় করে বিজ্ঞানভিত্তিক সমাধান দিতে আমার সাথে মাঠে চলুন।
             </p>
           </div>
+        </motion.div>
+
+        {/* Collapsible Instructions Guide */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.0 }}
+        >
+          <InstructionsGuide />
         </motion.div>
 
         {/* Difficulty Selection */}
@@ -1378,69 +1514,201 @@ interface WeatherScenario {
   riskOptions: { id: number; text: string; correct: boolean }[];
 }
 
-const WEATHER_SCENARIOS: WeatherScenario[] = [
-  {
-    type: 'rainy',
-    title: 'ভারী বৃষ্টি (Heavy Rain)',
-    desc: 'আগামী ৩ দিন ঝড়ো হাওয়া ও ভারী বৃষ্টির সম্ভাবনা রয়েছে।',
-    impact: 'বৃষ্টির ঝাপটায় ব্যাকটেরিয়া দ্রুত এক গাছ থেকে অন্য গাছে ছড়িয়ে পড়ে।',
-    bgUrl: 'https://images.unsplash.com/photo-1514632595863-608f81441848?q=80&w=1000&auto=format&fit=crop',
-    icon: Droplets,
-    riskOptions: [
-      { id: 1, text: 'ঝুঁকি কম। বৃষ্টিতে ব্যাকটেরিয়া ধুয়ে যাবে।', correct: false },
-      { id: 2, text: 'মাঝারি ঝুঁকি। শুধু সার প্রয়োগ কমালেই হবে।', correct: false },
-      { id: 3, text: 'উচ্চ ঝুঁকি! বৃষ্টি ও বাতাস BLB রোগ দ্রুত মহামারী আকারে ছড়াতে পারে।', correct: true },
-    ]
-  },
-  {
-    type: 'sunny',
-    title: 'তীব্র রোদ (Intense Sun)',
-    desc: 'টানা কয়েকদিন ধরে আকাশ পরিষ্কার এবং তাপমাত্রা অনেক বেশি।',
-    impact: 'তীব্র রোদে ব্যাকটেরিয়া কিছুটা দুর্বল হলেও আর্দ্রতা কম থাকলে রোগ ছড়ানো ধীর হয়।',
-    bgUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop',
-    icon: ThermometerSun,
-    riskOptions: [
-      { id: 1, text: 'উচ্চ ঝুঁকি। রোদ ব্যাকটেরিয়াকে শক্তিশালী করে।', correct: false },
-      { id: 2, text: 'মাঝারি ঝুঁকি। রোদ ও উচ্চ তাপমাত্রায় রোগ কিছুটা নিয়ন্ত্রণে থাকতে পারে।', correct: true },
-      { id: 3, text: 'ঝুঁকি নেই। রোদ সব ব্যাকটেরিয়া মেরে ফেলে।', correct: false },
-    ]
-  },
-  {
-    type: 'windy',
-    title: 'ঝড়ো হাওয়া (Strong Wind)',
-    desc: 'বাতাসের গতিবেগ অনেক বেশি, ধানের গাছগুলো একে অপরের সাথে ঘষা খাচ্ছে।',
-    impact: 'বাতাসে গাছের পাতায় ক্ষত তৈরি হয়, যা দিয়ে ব্যাকটেরিয়া সহজেই ভেতরে প্রবেশ করে।',
-    bgUrl: 'https://images.unsplash.com/photo-1496450681664-3df85efbd29f?q=80&w=1000&auto=format&fit=crop',
-    icon: Wind,
-    riskOptions: [
-      { id: 1, text: 'ঝুঁকি কম। বাতাস ব্যাকটেরিয়াকে উড়িয়ে নিয়ে যাবে।', correct: false },
-      { id: 2, text: 'উচ্চ ঝুঁকি! বাতাসের ঘর্ষণে পাতায় ক্ষত তৈরি হয় এবং রোগ দ্রুত ছড়ায়।', correct: true },
-      { id: 3, text: 'মাঝারি ঝুঁকি। বাতাস শুধু ধুলোবালি ছড়ায়।', correct: false },
-    ]
-  },
-  {
-    type: 'foggy',
-    title: 'ঘন কুয়াশা (Dense Fog)',
-    desc: 'সকাল থেকে দুপুর পর্যন্ত ঘন কুয়াশা এবং পাতায় শিশির জমে আছে।',
-    impact: 'অতিরিক্ত আর্দ্রতা ও শিশিরবিন্দু ব্যাকটেরিয়ার বংশবৃদ্ধির জন্য আদর্শ পরিবেশ।',
-    bgUrl: 'https://images.unsplash.com/photo-1485236715598-c8879a198911?q=80&w=1000&auto=format&fit=crop',
-    icon: CloudSun,
-    riskOptions: [
-      { id: 1, text: 'উচ্চ ঝুঁকি! কুয়াশা ও শিশির ব্যাকটেরিয়া ছড়ানোর জন্য খুবই অনুকূল।', correct: true },
-      { id: 2, text: 'ঝুঁকি নেই। কুয়াশা ব্যাকটেরিয়াকে ঢেকে রাখে।', correct: false },
-      { id: 3, text: 'মাঝারি ঝুঁকি। শুধু কুয়াশায় কিছু হয় না।', correct: false },
-    ]
-  }
-];
+// Function to generate weather scenarios based on issue type
+function generateWeatherScenarios(issue: RiceIssue | null): WeatherScenario[] {
+  const issueType = issue?.type || 'disease';
+  const issueName = issue?.bengaliName || 'সমস্যা';
+  
+  // Different impact texts based on issue type
+  const getRainyImpact = () => {
+    if (issueType === 'disease') {
+      return 'বৃষ্টির ঝাপটায় রোগজীবাণু দ্রুত এক গাছ থেকে অন্য গাছে ছড়িয়ে পড়ে।';
+    } else if (issueType === 'pest') {
+      return 'বৃষ্টিতে পোকার আক্রমণ কিছুটা কমলেও আর্দ্রতা বাড়লে পোকার বংশবৃদ্ধি বাড়তে পারে।';
+    } else {
+      return 'অতিরিক্ত বৃষ্টিতে পুষ্টি উপাদান মাটি থেকে ধুয়ে যেতে পারে।';
+    }
+  };
+  
+  const getSunnyImpact = () => {
+    if (issueType === 'disease') {
+      return 'তীব্র রোদে রোগজীবাণু কিছুটা দুর্বল হলেও আর্দ্রতা কম থাকলে রোগ ছড়ানো ধীর হয়।';
+    } else if (issueType === 'pest') {
+      return 'তীব্র রোদ ও উচ্চ তাপমাত্রায় কিছু পোকা দুর্বল হয়, তবে সব পোকা মারা যায় না।';
+    } else {
+      return 'তীব্র রোদে গাছের পানির চাহিদা বাড়ে এবং পুষ্টি শোষণ ব্যাহত হতে পারে।';
+    }
+  };
+  
+  const getWindyImpact = () => {
+    if (issueType === 'disease') {
+      return 'বাতাসে গাছের পাতায় ক্ষত তৈরি হয়, যা দিয়ে রোগজীবাণু সহজেই ভেতরে প্রবেশ করে।';
+    } else if (issueType === 'pest') {
+      return 'বাতাসে পোকা এক জমি থেকে অন্য জমিতে ছড়িয়ে পড়তে পারে।';
+    } else {
+      return 'ঝোড়ো বাতাসে গাছের শিকড় ক্ষতিগ্রস্ত হতে পারে এবং পুষ্টি শোষণ কমে যায়।';
+    }
+  };
+  
+  const getFoggyImpact = () => {
+    if (issueType === 'disease') {
+      return 'অতিরিক্ত আর্দ্রতা ও শিশিরবিন্দু রোগজীবাণুর বংশবৃদ্ধির জন্য আদর্শ পরিবেশ।';
+    } else if (issueType === 'pest') {
+      return 'কুয়াশা ও আর্দ্রতা পোকার বংশবৃদ্ধির জন্য অনুকূল পরিবেশ তৈরি করে।';
+    } else {
+      return 'কুয়াশাচ্ছন্ন আবহাওয়ায় গাছের বৃদ্ধি ধীর হয় এবং পুষ্টি শোষণ কমে যায়।';
+    }
+  };
+  
+  const getRainyRiskOptions = () => {
+    if (issueType === 'disease') {
+      return [
+        { id: 1, text: 'ঝুঁকি কম। বৃষ্টিতে রোগজীবাণু ধুয়ে যাবে।', correct: false },
+        { id: 2, text: 'মাঝারি ঝুঁকি। শুধু সার প্রয়োগ কমালেই হবে।', correct: false },
+        { id: 3, text: `উচ্চ ঝুঁকি! বৃষ্টি ও বাতাস ${issueName} দ্রুত মহামারী আকারে ছড়াতে পারে।`, correct: true },
+      ];
+    } else if (issueType === 'pest') {
+      return [
+        { id: 1, text: 'ঝুঁকি নেই। বৃষ্টিতে সব পোকা মারা যাবে।', correct: false },
+        { id: 2, text: `মাঝারি ঝুঁকি। ${issueName}-এর জন্য সতর্ক থাকতে হবে।`, correct: true },
+        { id: 3, text: 'ঝুঁকি খুব বেশি। বৃষ্টি পোকা বাড়ায়।', correct: false },
+      ];
+    } else {
+      return [
+        { id: 1, text: `উচ্চ ঝুঁকি! বৃষ্টিতে পুষ্টি ধুয়ে যেতে পারে এবং ${issueName} আরও বাড়তে পারে।`, correct: true },
+        { id: 2, text: 'ঝুঁকি নেই। বৃষ্টি গাছের জন্য ভালো।', correct: false },
+        { id: 3, text: 'মাঝারি ঝুঁকি। সার দিলেই হবে।', correct: false },
+      ];
+    }
+  };
+  
+  const getSunnyRiskOptions = () => {
+    if (issueType === 'disease') {
+      return [
+        { id: 1, text: 'উচ্চ ঝুঁকি। রোদ রোগজীবাণুকে শক্তিশালী করে।', correct: false },
+        { id: 2, text: `মাঝারি ঝুঁকি। রোদ ও উচ্চ তাপমাত্রায় ${issueName} কিছুটা নিয়ন্ত্রণে থাকতে পারে।`, correct: true },
+        { id: 3, text: 'ঝুঁকি নেই। রোদ সব রোগজীবাণু মেরে ফেলে।', correct: false },
+      ];
+    } else if (issueType === 'pest') {
+      return [
+        { id: 1, text: `উচ্চ ঝুঁকি। তীব্র রোদে ${issueName} আরও সক্রিয় হতে পারে।`, correct: false },
+        { id: 2, text: 'মাঝারি ঝুঁকি। তাপমাত্রা বেশি হলে কিছু পোকা মারা যেতে পারে।', correct: true },
+        { id: 3, text: 'ঝুঁকি নেই। সব পোকা রোদে মারা যাবে।', correct: false },
+      ];
+    } else {
+      return [
+        { id: 1, text: `উচ্চ ঝুঁকি! তীব্র রোদে ${issueName} আরও বাড়তে পারে।`, correct: true },
+        { id: 2, text: 'ঝুঁকি নেই। রোদ গাছের জন্য ভালো।', correct: false },
+        { id: 3, text: 'মাঝারি ঝুঁকি। পানি দিলেই হবে।', correct: false },
+      ];
+    }
+  };
+  
+  const getWindyRiskOptions = () => {
+    if (issueType === 'disease') {
+      return [
+        { id: 1, text: 'ঝুঁকি কম। বাতাস রোগজীবাণুকে উড়িয়ে নিয়ে যাবে।', correct: false },
+        { id: 2, text: `উচ্চ ঝুঁকি! বাতাসের ঘর্ষণে পাতায় ক্ষত তৈরি হয় এবং ${issueName} দ্রুত ছড়ায়।`, correct: true },
+        { id: 3, text: 'মাঝারি ঝুঁকি। বাতাস শুধু ধুলোবালি ছড়ায়।', correct: false },
+      ];
+    } else if (issueType === 'pest') {
+      return [
+        { id: 1, text: 'ঝুঁকি কম। বাতাস পোকাকে উড়িয়ে নিয়ে যাবে।', correct: false },
+        { id: 2, text: `উচ্চ ঝুঁকি! বাতাসে ${issueName} অন্য জমিতে ছড়িয়ে পড়তে পারে।`, correct: true },
+        { id: 3, text: 'মাঝারি ঝুঁকি। বাতাসে কিছু হবে না।', correct: false },
+      ];
+    } else {
+      return [
+        { id: 1, text: `উচ্চ ঝুঁকি! বাতাসে গাছ ক্ষতিগ্রস্ত হলে ${issueName} আরও বাড়তে পারে।`, correct: true },
+        { id: 2, text: 'ঝুঁকি নেই। বাতাস গাছের জন্য ভালো।', correct: false },
+        { id: 3, text: 'মাঝারি ঝুঁকি। বাতাসে কিছু হবে না।', correct: false },
+      ];
+    }
+  };
+  
+  const getFoggyRiskOptions = () => {
+    if (issueType === 'disease') {
+      return [
+        { id: 1, text: `উচ্চ ঝুঁকি! কুয়াশা ও শিশির ${issueName} ছড়ানোর জন্য খুবই অনুকূল।`, correct: true },
+        { id: 2, text: 'ঝুঁকি নেই। কুয়াশা রোগজীবাণুকে ঢেকে রাখে।', correct: false },
+        { id: 3, text: 'মাঝারি ঝুঁকি। শুধু কুয়াশায় কিছু হয় না।', correct: false },
+      ];
+    } else if (issueType === 'pest') {
+      return [
+        { id: 1, text: `উচ্চ ঝুঁকি! কুয়াশাচ্ছন্ন আবহাওয়া ${issueName}-এর বংশবৃদ্ধির জন্য অনুকূল।`, correct: true },
+        { id: 2, text: 'ঝুঁকি নেই। কুয়াশায় পোকা থাকে না।', correct: false },
+        { id: 3, text: 'মাঝারি ঝুঁকি। কুয়াশায় কিছু হবে না।', correct: false },
+      ];
+    } else {
+      return [
+        { id: 1, text: `উচ্চ ঝুঁকি! আর্দ্রতায় ${issueName} আরও বাড়তে পারে।`, correct: true },
+        { id: 2, text: 'ঝুঁকি নেই। কুয়াশা গাছের জন্য ভালো।', correct: false },
+        { id: 3, text: 'মাঝারি ঝুঁকি। কুয়াশায় কিছু হবে না।', correct: false },
+      ];
+    }
+  };
+  
+  return [
+    {
+      type: 'rainy' as WeatherType,
+      title: 'ভারী বৃষ্টি (Heavy Rain)',
+      desc: 'আগামী ৩ দিন ঝড়ো হাওয়া ও ভারী বৃষ্টির সম্ভাবনা রয়েছে।',
+      impact: getRainyImpact(),
+      bgUrl: 'https://images.unsplash.com/photo-1514632595863-608f81441848?q=80&w=1000&auto=format&fit=crop',
+      icon: Droplets,
+      riskOptions: getRainyRiskOptions()
+    },
+    {
+      type: 'sunny' as WeatherType,
+      title: 'তীব্র রোদ (Intense Sun)',
+      desc: 'টানা কয়েকদিন ধরে আকাশ পরিষ্কার এবং তাপমাত্রা অনেক বেশি।',
+      impact: getSunnyImpact(),
+      bgUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop',
+      icon: ThermometerSun,
+      riskOptions: getSunnyRiskOptions()
+    },
+    {
+      type: 'windy' as WeatherType,
+      title: 'ঝড়ো হাওয়া (Strong Wind)',
+      desc: 'বাতাসের গতিবেগ অনেক বেশি, ধানের গাছগুলো একে অপরের সাথে ঘষা খাচ্ছে।',
+      impact: getWindyImpact(),
+      bgUrl: 'https://images.unsplash.com/photo-1496450681664-3df85efbd29f?q=80&w=1000&auto=format&fit=crop',
+      icon: Wind,
+      riskOptions: getWindyRiskOptions()
+    },
+    {
+      type: 'foggy' as WeatherType,
+      title: 'ঘন কুয়াশা (Dense Fog)',
+      desc: 'সকাল থেকে দুপুর পর্যন্ত ঘন কুয়াশা এবং পাতায় শিশির জমে আছে।',
+      impact: getFoggyImpact(),
+      bgUrl: 'https://images.unsplash.com/photo-1485236715598-c8879a198911?q=80&w=1000&auto=format&fit=crop',
+      icon: CloudSun,
+      riskOptions: getFoggyRiskOptions()
+    }
+  ];
+}
 
 function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onUnlockAchievement, difficulty, currentIssue }: { onComplete: (f: string) => void; soundEnabled: boolean; score: number; hintsUsed: number; onUseHint: () => void; onUnlockAchievement: (id: string) => void; difficulty: Difficulty; currentIssue: RiceIssue | null; key?: string }) {
   const [selectedRisk, setSelectedRisk] = useState<number | null>(null);
   const [mistakeMade, setMistakeMade] = useState(false);
+  
+  // Generate weather scenarios based on current issue
+  const weatherScenarios = useMemo(() => generateWeatherScenarios(currentIssue), [currentIssue]);
   const [scenario] = useState<WeatherScenario>(() => {
-    // For hard difficulty, we could potentially pick harder scenarios if we had them.
-    // For now, just picking randomly.
-    return WEATHER_SCENARIOS[Math.floor(Math.random() * WEATHER_SCENARIOS.length)];
+    return weatherScenarios[Math.floor(Math.random() * weatherScenarios.length)];
   });
+  
+  // Dynamic hint based on issue type
+  const getDynamicHint = () => {
+    const issueType = currentIssue?.type || 'disease';
+    if (issueType === 'disease') {
+      return 'বৃষ্টি এবং দমকা হাওয়া রোগজীবাণু ছড়িয়ে দিতে সাহায্য করে। তাই আবহাওয়ার পূর্বাভাস গুরুত্ব সহকারে দেখুন।';
+    } else if (issueType === 'pest') {
+      return 'আবহাওয়া পোকার বংশবৃদ্ধি ও ছড়িয়ে পড়ার ওপর প্রভাব ফেলে। বাতাস ও আর্দ্রতা বিশেষভাবে গুরুত্বপূর্ণ।';
+    } else {
+      return 'প্রতিকূল আবহাওয়া পুষ্টি শোষণে বাধা দিতে পারে। বৃষ্টি ও তাপমাত্রা বিশেষভাবে গুরুত্বপূর্ণ।';
+    }
+  };
 
   const handleRiskSelect = (option: { id: number, correct: boolean }) => {
     setSelectedRisk(option.id);
@@ -1523,7 +1791,7 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
             <scenario.icon className="w-10 h-10 text-yellow-400" /> {CABI_TERMS.think}
           </h2>
           <HintButton 
-            hint="বৃষ্টি এবং দমকা হাওয়া ব্যাকটেরিয়া ছড়িয়ে দিতে সাহায্য করে। তাই আবহাওয়ার পূর্বাভাস গুরুত্ব সহকারে দেখুন।" 
+            hint={getDynamicHint()} 
             onUse={onUseHint} 
             score={score} 
             soundEnabled={soundEnabled} 
@@ -1532,7 +1800,7 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
           />
         </div>
         <AvatarDialog 
-          text={`মাঠের আবহাওয়া এখন ${scenario.title.toLowerCase()}। গত সপ্তাহে আবার ইউরিয়াও দিয়েছিলাম। এই অবস্থায় রোগের ঝুঁকি কতটা বলে আপনার মনে হয়?`} 
+          text={`মাঠের আবহাওয়া এখন ${scenario.title.toLowerCase()}। ${currentIssue ? `${currentIssue.bengaliName}-এর` : 'সমস্যার'} ক্ষেত্রে এই অবস্থায় ঝুঁকি কতটা বলে আপনার মনে হয়?`} 
           mood={scenario.type === 'sunny' ? 'thinking' : 'sad'} 
         />
       </div>
@@ -1553,10 +1821,10 @@ function PhaseThink({ onComplete, soundEnabled, score, hintsUsed, onUseHint, onU
           whileHover={{ y: -5 }}
           className="bg-green-800/80 backdrop-blur-xl p-6 rounded-[2rem] border border-red-500/30 flex items-start gap-5 shadow-2xl"
         >
-          <div className="bg-red-500 text-white p-4 rounded-2xl shadow-lg"><FlaskConical className="w-8 h-8" /></div>
+          <div className="bg-red-500 text-white p-4 rounded-2xl shadow-lg">{currentIssue?.type === 'disease' ? <FlaskConical className="w-8 h-8" /> : currentIssue?.type === 'pest' ? <Bug className="w-8 h-8" /> : <Leaf className="w-8 h-8" />}</div>
           <div>
-            <h3 className="font-black text-xl text-red-400 mb-2 italic">সাম্প্রতিক কাজ</h3>
-            <p className="text-white/80 font-medium leading-relaxed">গত সপ্তাহে জমিতে অতিরিক্ত ইউরিয়া সার প্রয়োগ করা হয়েছে। এটি গাছকে নরম ও রোগপ্রবণ করে তোলে।</p>
+            <h3 className="font-black text-xl text-red-400 mb-2 italic">সাম্প্রতিক অবস্থা</h3>
+            <p className="text-white/80 font-medium leading-relaxed">{currentIssue?.causes || 'গত সপ্তাহে জমিতে অতিরিক্ত ইউরিয়া সার প্রয়োগ করা হয়েছে। এটি গাছকে নরম ও রোগপ্রবণ করে তোলে।'}</p>
           </div>
         </motion.div>
       </div>
